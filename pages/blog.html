@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Raven Studio</title>
+    <meta name="description" content="Blog oficial do Raven Studio - Arte, técnicas e novidades do mundo da tatuagem">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Teko:wght@400;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="/css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+.comment-input {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    background: rgba(30, 30, 30, 0.8);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 20px;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.comment-input:focus {
+    border-color: #3b82f6;
+    outline: none;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.comments-section {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.comments-section.show {
+    max-height: 500px;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(59, 130, 246, 0.2);
+}
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: radial-gradient(ellipse at bottom, #0a0a0a 0%, #000000 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .blog-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at bottom, #0a0a0a 0%, #000000 100%);
+            z-index: -2;
+        }
+
+        .blog-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        .blog-main {
+            min-height: 100vh;
+            padding: 100px 2rem 2rem;
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .blog-header h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3.5rem;
+            color: #3b82f6;
+            text-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-header p {
+            color: #d1d5db;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .user-info {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 1.5rem;
+            background: rgba(15, 15, 15, 0.9);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6 0%, #22c55e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .user-name {
+            color: #d1d5db;
+            font-size: 0.9rem;
+        }
+
+        .admin-toggle {
+            background: none;
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            border-radius: 20px;
+            color: #3b82f6;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .admin-toggle.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #22c55e 100%);
+            color: #000;
+            font-weight: bold;
+        }
+
+        .new-post-form {
+            background: rgba(15, 15, 15, 0.9);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            backdrop-filter: blur(10px);
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        .new-post-form.show {
+            display: block;
+        }
+
+        .post-form-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6 0%, #22c55e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .form-user-info {
+            flex: 1;
+        }
+
+        .form-username {
+            font-family: 'Teko', sans-serif;
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .form-time {
+            color: #6b7280;
+            font-size: 0.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            border-radius: 12px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            resize: vertical;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            transition: all 0.3s ease;
+        }
+
+        .form-group textarea:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+            outline: none;
+        }
+
+        .form-group textarea::placeholder {
+            color: #6b7280;
+        }
+
+        .image-upload {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .image-upload input[type="file"] {
+            display: none;
+        }
+
+        .image-upload-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            width: 100%;
+            padding: 1rem;
+            background: rgba(30, 30, 30, 0.8);
+            border: 2px dashed rgba(59, 130, 246, 0.5);
+            border-radius: 12px;
+            color: #3b82f6;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .image-upload-btn:hover {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .image-preview {
+            margin-top: 1rem;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            display: none;
+        }
+
+        .image-preview img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+        }
+
+        .remove-image {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: rgba(239, 68, 68, 0.8);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .remove-image:hover {
+            background: #ef4444;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .post-options {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .option-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            border-radius: 50%;
+            color: #3b82f6;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .option-btn:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: #3b82f6;
+        }
+
+        .post-btn {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #22c55e 100%);
+            border: none;
+            border-radius: 25px;
+            color: #000;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .post-btn:hover {
+            background: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .posts-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .post-card {
+            background: rgba(15, 15, 15, 0.9);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .post-card:hover {
+            border-color: rgba(59, 130, 246, 0.6);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 1.5rem 1rem;
+        }
+
+        .post-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .post-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-avatar.default {
+            background: linear-gradient(135deg, #3b82f6 0%, #22c55e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .post-user-info {
+            flex: 1;
+        }
+
+        .post-username {
+            font-family: 'Teko', sans-serif;
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .post-time {
+            color: #6b7280;
+            font-size: 0.8rem;
+        }
+
+        .post-content {
+            padding: 0 1.5rem 1rem;
+        }
+
+        .post-text {
+            color: #d1d5db;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .post-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .post-image:hover {
+            transform: scale(1.02);
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-around;
+            padding: 1rem 1.5rem;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .post-action {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .post-action:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .post-action.liked {
+            color: #ef4444;
+        }
+
+        .post-action.liked:hover {
+            color: #dc2626;
+        }
+
+        .comments-section {
+            padding: 0 1.5rem 1.5rem;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .comments-section.show {
+            display: block;
+        }
+
+        .comment-form {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .comment-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .comment-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .comment-avatar.default {
+            background: rgba(59, 130, 246, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3b82f6;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .comment-input {
+            flex: 1;
+            padding: 0.8rem;
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 20px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .comment-input:focus {
+            border-color: #3b82f6;
+            outline: none;
+        }
+
+        .comment {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .comment-content {
+            flex: 1;
+            background: rgba(30, 30, 30, 0.5);
+            padding: 1rem;
+            border-radius: 12px;
+        }
+
+        .comment-user {
+            font-weight: bold;
+            color: #3b82f6;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .comment-text {
+            color: #d1d5db;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .comment-time {
+            color: #6b7280;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .empty-feed {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .empty-feed i {
+            font-size: 4rem;
+            color: rgba(59, 130, 246, 0.5);
+            margin-bottom: 2rem;
+        }
+
+        .empty-feed h3 {
+            font-family: 'Bebas Neue', cursive;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .empty-feed p {
+            color: #d1d5db;
+        }
+
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(5px);
+        }
+
+        .image-modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .image-modal img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            .blog-main {
+                padding: 80px 1rem 1rem;
+            }
+            
+            .blog-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .user-info {
+                position: static;
+                margin-bottom: 2rem;
+                justify-content: center;
+            }
+            
+            .post-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .post-options {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+        <!-- Navigation -->
+    <nav id="navbar" class="navbar" role="navigation" aria-label="Menu principal">
+    <div class="nav-container">
+        <div class="nav-brand">
+            <a href="/pages/home.html" class="brand-link">
+                <img src="/img/logo.png" alt="Logo RAVEN" class="brand-logo">
+                <span class="brand-text">RAVEN</span>
+            </a>
+        </div>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu de navegação" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu" id="nav-menu" role="menubar">
+            <li role="none"><a href="/pages/home.html" role="menuitem" class="nav-link"><i class="fas fa-home"></i> Início</a></li>
+            <li role="none"><a href="/pages/loja.html" role="menuitem" class="nav-link active"><i class="fas fa-store"></i> Loja</a></li>
+            <li role="none"><a href="/pages/artists.html" role="menuitem" class="nav-link"><i class="fas fa-star"></i> Artistas</a></li>
+            <li role="none"><a href="/pages/contato.html" role="menuitem" class="nav-link"><i class="fas fa-envelope"></i> Contato</a></li>
+            <li role="none"><a href="/pages/blog.html" role="menuitem" class="nav-link"><i class="fas fa-blog"></i> Blog</a></li>
+            <li role="none"><a href="/pages/game.html" role="menuitem" class="nav-link"><i class="fas fa-gamepad"></i>Game</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="/pages/login.html" class="nav-icon" aria-label="Login"><i class="fas fa-user"></i></a>
+            <a href="/pages/carrinho.html" class="nav-icon" aria-label="Carrinho de compras"><i class="fas fa-shopping-cart"></i></a>
+        </div>
+    </div>
+</nav>
+    <div class="blog-bg"></div>
+    <div class="blog-particles" id="particles-js"></div>
+    
+    <div class="user-info">
+        <div class="user-avatar" id="current-user-avatar">U</div>
+        <div class="user-name" id="current-user-name">Usuário</div>
+        <button class="admin-toggle" id="admin-toggle">
+            <i class="fas fa-user-shield"></i> Admin: OFF
+        </button>
+    </div>
+    
+    <main class="blog-main">
+        <header class="blog-header">
+            <h1>RAVEN STUDIO BLOG</h1>
+            <p>Arte, técnicas e novidades do mundo da tatuagem</p>
+        </header>
+        
+        <!-- Formulário para novos posts (apenas admin) -->
+        <div class="new-post-form" id="new-post-form">
+            <div class="post-form-header">
+                <div class="form-avatar">RS</div>
+                <div class="form-user-info">
+                    <div class="form-username">Raven Studio</div>
+                    <div class="form-time">Agora</div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <textarea id="post-content" placeholder="Compartilhe algo interessante sobre tatuagem..."></textarea>
+            </div>
+            
+            <div class="image-upload">
+                <input type="file" id="image-input" accept="image/*">
+                <label for="image-input" class="image-upload-btn">
+                    <i class="fas fa-image"></i>
+                    Adicionar Foto
+                </label>
+                <div class="image-preview" id="image-preview">
+                    <img id="preview-image" src="" alt="Preview">
+                    <button class="remove-image" onclick="blog.removeImage()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="post-actions">
+                <div class="post-options">
+                    <button class="option-btn" title="Adicionar vídeo">
+                        <i class="fas fa-video"></i>
+                    </button>
+                    <button class="option-btn" title="Adicionar localização">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </button>
+                    <button class="option-btn" title="Adicionar emoji">
+                        <i class="fas fa-smile"></i>
+                    </button>
+                </div>
+                <button class="post-btn" onclick="blog.createPost()">
+                    PUBLICAR
+                </button>
+            </div>
+        </div>
+        
+        <!-- Feed de Posts -->
+        <div class="posts-feed" id="posts-feed">
+            <!-- Posts serão inseridos aqui -->
+        </div>
+    </main>
+
+    <!-- Modal para visualizar imagens -->
+    <div class="image-modal" id="image-modal">
+        <div class="close-modal" onclick="blog.closeImageModal()">&times;</div>
+        <div class="image-modal-content">
+            <img id="modal-image" src="" alt="Imagem ampliada">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <span class="brand-mascot">🐦‍⬛</span>
+                        <h3>RAVEN STUDIO</h3>
+                    </div>
+                    <p>Transformando pele em arte desde 2016. Cada tatuagem conta uma história única.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon" aria-label="Instagram do Raven Studio">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Facebook do Raven Studio">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="TikTok do Raven Studio">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="YouTube do Raven Studio">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>LINKS RÁPIDOS</h4>
+                    <ul>
+                        <li><a href="/">Início</a></li>
+                        <li><a href="/artists.html">Artistas</a></li>
+                        <li><a href="/portfolio.html">Portfólio</a></li>
+                        <li><a href="#testimonials">Depoimentos</a></li>
+                        <li><a href="#booking">Agendamento</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>CONTATO</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                        <span>Rua das Artes, 123<br>Vila Madalena - São Paulo, SP</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone" aria-hidden="true"></i>
+                        <span>(11) 99999-9999</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <span>contato@ravenstudio.com</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-divider"></div>
+                <div class="footer-copyright">
+                    <p>&copy; 2024 Raven Studio. Todos os direitos reservados.</p>
+                    <p class="footer-love">Feito com <i class="fas fa-heart" aria-hidden="true"></i> para amantes da arte corporal</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+ <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+    <script src="/js/user-session.js"></script>
+    <script src="/js/home.js"></script>
+
+    <script src="/js/user-session.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        window.blog = new RavenBlog();
+        window.userSession = new UserSession();
+        
+        // Forçar atualização dos posts após login
+        if (window.userSession.currentUser) {
+            window.blog.renderPosts();
+        }
+    });
+</script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Inicializar partículas
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 } },
+                color: { value: "#3b82f6" },
+                shape: { type: "circle" },
+                opacity: { value: 0.3, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#3b82f6", opacity: 0.2, width: 1 },
+                move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            }
+        });
+
+      class RavenBlog {
+    constructor() {
+        this.posts = JSON.parse(localStorage.getItem('ravenStudioPosts')) || this.getDefaultPosts();
+        this.currentUser = JSON.parse(localStorage.getItem('ravenStudioCurrentUser')) || null;
+        this.isAdmin = false;
+        this.selectedImage = null;
+        this.init();
+    }
+
+            init() {
+                this.loadCurrentUser();
+                this.renderPosts();
+                this.setupEventListeners();
+            }
+
+            loadCurrentUser() {
+                const userAvatar = document.getElementById('current-user-avatar');
+                const userName = document.getElementById('current-user-name');
+                
+                if (this.currentUser.avatar) {
+                    userAvatar.innerHTML = `<img src="${this.currentUser.avatar}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
+                } else {
+                    userAvatar.textContent = this.currentUser.name.charAt(0).toUpperCase();
+                }
+                
+                userName.textContent = this.currentUser.name;
+            }
+
+            getDefaultPosts() {
+    return [
+        {
+            id: 'post1',
+            user: 'Raven Studio',
+            avatar: 'https://example.com/raven-avatar.png', // Adicione uma URL para o avatar do admin
+            content: 'Acabamos de terminar uma peça incrível! Arte blackwork com elementos geométricos. O que vocês acham dessa tendência?',
+            image: 'https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=600',
+            timestamp: Date.now() - 3600000,
+            likes: 24,
+            comments: [
+                {
+                    id: 'comment1',
+                    user: 'João Silva',
+                    avatar: null,
+                    content: 'Ficou incrível! Quando posso agendar uma sessão?',
+                    timestamp: Date.now() - 3000000
+                },
+                // ... outros comentários
+            ],
+            liked: false
+        },
+        // ... outros posts
+    ];
+}
+            toggleAdmin() {
+                this.isAdmin = !this.isAdmin;
+                const toggle = document.getElementById('admin-toggle');
+                const form = document.getElementById('new-post-form');
+                
+                if (this.isAdmin) {
+                    toggle.classList.add('active');
+                    toggle.innerHTML = '<i class="fas fa-user-shield"></i> Admin: ON';
+                    form.classList.add('show');
+                } else {
+                    toggle.classList.remove('active');
+                    toggle.innerHTML = '<i class="fas fa-user-shield"></i> Admin: OFF';
+                    form.classList.remove('show');
+                }
+            }
+
+            createPost() {
+                const content = document.getElementById('post-content').value.trim();
+                if (!content || !this.isAdmin) return;
+
+                const newPost = {
+                    id: 'post' + Date.now(),
+                    user: 'Raven Studio',
+                    avatar: null,
+                    content: content,
+                    image: this.selectedImage,
+                    timestamp: Date.now(),
+                    likes: 0,
+                    comments: [],
+                    liked: false
+                };
+
+                this.posts.unshift(newPost);
+                this.savePosts();
+                this.renderPosts();
+                
+                // Limpar formulário
+                document.getElementById('post-content').value = '';
+                this.removeImage();
+                this.showNotification('Post publicado com sucesso!');
+            }
+
+            handleImageUpload(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        this.selectedImage = e.target.result;
+                        document.getElementById('preview-image').src = this.selectedImage;
+                        document.getElementById('image-preview').style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+
+            removeImage() {
+                this.selectedImage = null;
+                document.getElementById('image-preview').style.display = 'none';
+                document.getElementById('image-input').value = '';
+            }
+
+            openImageModal(imageSrc) {
+                document.getElementById('modal-image').src = imageSrc;
+                document.getElementById('image-modal').style.display = 'block';
+            }
+
+            closeImageModal() {
+                document.getElementById('image-modal').style.display = 'none';
+            }
+
+            getUserAvatar(user, avatar) {
+                if (avatar) {
+                    return `<img src="${avatar}" alt="${user}">`;
+                } else if (user === 'Raven Studio') {
+                    return '<div class="post-avatar default">RS</div>';
+                } else {
+                    return `<div class="comment-avatar default">${user.charAt(0).toUpperCase()}</div>`;
+                }
+            }
+  toggleLike(postId) {
+        if (!window.userSession || !window.userSession.isLoggedIn()) {
+            alert('Por favor, faça login para curtir posts.');
+            window.location.href = '/pages/login.html';
+            return;
+        }
+
+        const post = this.posts.find(p => p.id === postId);
+        if (post) {
+            post.liked = !post.liked;
+            post.likes = post.liked ? post.likes + 1 : post.likes - 1;
+            this.savePosts();
+            this.renderPosts();
+        }
+    }
+
+ addComment(postId) {
+    const input = document.getElementById(`comment-input-${postId}`);
+    const content = input.value.trim();
+    
+    if (!content) {
+        this.showNotification('Digite um comentário antes de enviar!');
+        return;
+    }
+
+    if (!window.userSession || !window.userSession.isLoggedIn()) {
+        this.showNotification('Por favor, faça login para comentar.');
+        setTimeout(() => {
+            window.location.href = '/pages/login.html';
+        }, 1500);
+        return;
+    }
+
+    const post = this.posts.find(p => p.id === postId);
+    if (post) {
+        const newComment = {
+            id: 'comment' + Date.now(),
+            user: window.userSession.currentUser.name,
+            avatar: window.userSession.currentUser.avatar,
+            content: content,
+            timestamp: Date.now()
+        };
+
+        post.comments.push(newComment);
+        this.savePosts();
+        this.renderPosts();
+        
+        // Limpa o input e mantém a seção de comentários aberta
+        input.value = '';
+        const commentsSection = document.getElementById(`comments-${postId}`);
+        commentsSection.classList.add('show');
+        
+        this.showNotification('Comentário adicionado!');
+    }
+}
+    // Modifique o método renderPosts para usar os dados do usuário logado
+   renderPosts() {
+    const container = document.getElementById('posts-feed');
+    
+    if (this.posts.length === 0) {
+        container.innerHTML = `
+            <div class="empty-feed">
+                <i class="fas fa-rss"></i>
+                <h3>Nenhum post ainda</h3>
+                <p>Seja o primeiro a compartilhar algo interessante!</p>
+            </div>
+        `;
+        return;
+    }
+
+    const postsHtml = this.posts.map(post => {
+        const timeAgo = this.getTimeAgo(post.timestamp);
+        
+        // HTML dos comentários
+        const commentsHtml = post.comments.map(comment => {
+            const avatarHtml = comment.avatar 
+                ? `<div class="comment-avatar"><img src="${comment.avatar}" alt="${comment.user}"></div>`
+                : `<div class="comment-avatar default">${comment.user.charAt(0).toUpperCase()}</div>`;
+            
+            return `
+                <div class="comment">
+                    ${avatarHtml}
+                    <div class="comment-content">
+                        <div class="comment-user">${comment.user}</div>
+                        <div class="comment-text">${comment.content}</div>
+                        <div class="comment-time">${this.getTimeAgo(comment.timestamp)}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        // HTML do formulário de comentário
+        const currentUser = this.currentUser;
+        const commentFormHtml = `
+            <div class="comment-form">
+                ${currentUser && currentUser.avatar 
+                    ? `<div class="comment-avatar"><img src="${currentUser.avatar}" alt="${currentUser.name}"></div>`
+                    : `<div class="comment-avatar default">${currentUser ? currentUser.name.charAt(0).toUpperCase() : 'U'}</div>`}
+                <input type="text" class="comment-input" id="comment-input-${post.id}" 
+                       placeholder="Escreva um comentário..." 
+                       onkeypress="if(event.key === 'Enter') blog.addComment('${post.id}')">
+            </div>
+        `;
+
+        // HTML completo do post
+        return `
+            <article class="post-card">
+                <header class="post-header">
+                    ${post.avatar 
+                        ? `<div class="post-avatar"><img src="${post.avatar}" alt="${post.user}"></div>`
+                        : `<div class="post-avatar default">${post.user.charAt(0).toUpperCase()}</div>`}
+                    <div class="post-user-info">
+                        <div class="post-username">${post.user}</div>
+                        <div class="post-time">${timeAgo}</div>
+                    </div>
+                </header>
+                
+                <div class="post-content">
+                    <p class="post-text">${post.content}</p>
+                    ${post.image ? `<img src="${post.image}" class="post-image" onclick="blog.openImageModal('${post.image}')">` : ''}
+                </div>
+                
+                <footer class="post-footer">
+                    <button class="post-action ${post.liked ? 'liked' : ''}" onclick="blog.toggleLike('${post.id}')">
+                        <i class="fas fa-heart"></i> ${post.likes}
+                    </button>
+                    <button class="post-action" onclick="blog.toggleComments('${post.id}')">
+                        <i class="fas fa-comment"></i> ${post.comments.length}
+                    </button>
+                    <button class="post-action">
+                        <i class="fas fa-share"></i> Compartilhar
+                    </button>
+                </footer>
+                
+                <div class="comments-section" id="comments-${post.id}">
+                    ${commentFormHtml}
+                    ${commentsHtml}
+                </div>
+            </article>
+        `;
+    }).join('');
+
+    container.innerHTML = postsHtml;
+}
+
+                  toggleComments(postId) {
+    const commentsSection = document.getElementById(`comments-${postId}`);
+    commentsSection.classList.toggle('show');
+    
+    // Foca no campo de comentário quando aberto
+    if (commentsSection.classList.contains('show')) {
+        const input = document.getElementById(`comment-input-${postId}`);
+        setTimeout(() => input.focus(), 100);
+    }
+}
+            getTimeAgo(timestamp) {
+                const now = Date.now();
+                const diff = now - timestamp;
+                const minutes = Math.floor(diff / 60000);
+                const hours = Math.floor(diff / 3600000);
+                const days = Math.floor(diff / 86400000);
+
+                if (days > 0) return `${days}d`;
+                if (hours > 0) return `${hours}h`;
+                if (minutes > 0) return `${minutes}min`;
+                return 'agora';
+            }
+
+            savePosts() {
+                localStorage.setItem('ravenStudioPosts', JSON.stringify(this.posts));
+            }
+
+            showNotification(message) {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    right: 20px;
+                    background: linear-gradient(135deg, #3b82f6, #22c55e);
+                    color: #000;
+                    padding: 1rem 2rem;
+                    border-radius: 10px;
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                    z-index: 1000;
+                    font-family: 'Bebas Neue', cursive;
+                    font-size: 1.2rem;
+                    animation: slideIn 0.3s ease-out;
+                `;
+                notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease-out';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+
+            setupEventListeners() {
+                document.getElementById('admin-toggle').addEventListener('click', () => {
+                    this.toggleAdmin();
+                });
+
+                document.getElementById('image-input').addEventListener('change', (e) => {
+                    this.handleImageUpload(e);
+                });
+
+                // Close modal when clicking outside
+                document.getElementById('image-modal').addEventListener('click', (e) => {
+                    if (e.target.id === 'image-modal') {
+                        this.closeImageModal();
+                    }
+                });
+            }
+        }
+
+        // Adicionar estilos de animação
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Inicializar blog
+        const blog = new RavenBlog();
+    </script>
+</body>
+</html>

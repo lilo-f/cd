@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho | Raven Studio</title>
+    <meta name="description" content="Carrinho de compras - Raven Studio">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Teko:wght@400;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: radial-gradient(ellipse at bottom, #0a0a0a 0%, #000000 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .cart-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at bottom, #0a0a0a 0%, #000000 100%);
+            z-index: -2;
+        }
+
+        .cart-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        .cart-main {
+            min-height: 100vh;
+            padding: 100px 2rem 2rem;
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .cart-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .cart-header h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3.5rem;
+            color: #3b82f6;
+            text-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-header p {
+            color: #d1d5db;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .cart-content {
+            display: grid;  grid-template-columns: 1fr 380px;
+            gap: 3rem;
+        }
+
+        .cart-items {
+            background: rgba(15, 15, 15, 0.9);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .cart-items:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 120px 1fr auto auto auto;
+            gap: 1.5rem;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item:hover {
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 0 -1rem;
+        }
+
+        .item-image {
+            width: 120px;
+            height: 100px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .cart-item:hover .item-image img {
+            transform: scale(1.05);
+        }
+
+        .item-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .item-info h3 {
+            font-family: 'Teko', sans-serif;
+            color: white;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .item-info p {
+            color: #d1d5db;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .item-price {
+            font-family: 'Bebas Neue', cursive;
+            color: #3b82f6;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 12px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            overflow: hidden;
+        }
+
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            color: #3b82f6;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .qty-btn:hover {
+            background: rgba(59, 130, 246, 0.2);
+        }
+
+        .qty-input {
+            width: 50px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 0.5rem 0;
+        }
+
+        .qty-input:focus {
+            outline: none;
+        }
+
+        .remove-btn {
+            width: 45px;
+            height: 45px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            color: #ef4444;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .remove-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+            transform: scale(1.05);
+        }
+
+        .cart-summary {
+            background: rgba(15, 15, 15, 0.9);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            backdrop-filter: blur(10px);
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+            transition: all 0.3s ease;
+        }
+
+        .cart-summary:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .summary-title {
+            font-family: 'Bebas Neue', cursive;
+            color: #3b82f6;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .summary-row.total {
+            border-top: 1px solid rgba(59, 130, 246, 0.3);
+            padding-top: 1rem;
+            margin-top: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .summary-label {
+            color: #d1d5db;
+        }
+
+        .summary-value {
+            color: white;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.1rem;
+        }
+
+        .total .summary-value {
+            color: #3b82f6;
+            font-size: 1.6rem;
+        }
+
+        .coupon-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(30, 30, 30, 0.5);
+            border-radius: 12px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .coupon-section:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .coupon-title {
+            color: #3b82f6;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .coupon-input {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .coupon-input input {
+            width: 100%; /* Changed from flex: 1; */
+            flex-grow: 1; /* Allows it to grow */
+            padding: 0.8rem;
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            border-radius: 8px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .coupon-input input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+            outline: none;
+        }
+
+        .coupon-btn {
+            flex-shrink: 0; /* Added to prevent shrinking */
+            white-space: nowrap; /* Added to prevent text breaking */
+            padding: 0.8rem 1.5rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            border-radius: 8px;
+            color: #3b82f6;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .coupon-btn:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .coupon-btn.applied {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: #22c55e;
+            color: #22c55e;
+        }
+
+        .remove-coupon {
+            margin-top: 0.8rem;
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .remove-coupon:hover {
+            color: #dc2626;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #22c55e 100%);
+            border: none;
+            border-radius: 15px;
+            color: #000;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .checkout-btn:hover {
+            background: #3b82f6;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(59, 130, 246, 0.5);
+        }
+
+        .continue-shopping {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            border-radius: 12px;
+            color: #3b82f6;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .continue-shopping:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .empty-cart {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 0;
+            background: rgba(15, 15, 15, 0.9);
+            border-radius: 20px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .empty-cart i {
+            font-size: 4rem;
+            color: rgba(59, 130, 246, 0.5);
+            margin-bottom: 2rem;
+        }
+
+        .empty-cart h3 {
+            font-family: 'Bebas Neue', cursive;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .empty-cart p {
+            color: #d1d5db;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .empty-cart-btn {
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #22c55e 100%);
+            border: none;
+            border-radius: 12px;
+            color: #000;
+            font-weight: 700;
+            font-family: 'Bebas Neue', cursive;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .empty-cart-btn:hover {
+            background: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #3b82f6, #22c55e);
+            color: #000;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.2rem;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .notification.error {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        @media (max-width: 1024px) {
+            .cart-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart-summary {
+                position: static;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cart-main {
+                padding: 80px 1rem 1rem;
+            }
+            
+            .cart-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cart-item {
+                grid-template-columns: 80px 1fr;
+                gap: 1rem;
+            }
+            
+            .item-image {
+                width: 80px;
+                height: 70px;
+            }
+            
+            .item-controls {
+                grid-column: 1 / -1;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+  <nav id="navbar" class="navbar" role="navigation" aria-label="Menu principal">
+    <div class="nav-container">
+        <div class="nav-brand">
+            <a href="/pages/home.html" class="brand-link">
+                <img src="/img/logo.png" alt="Logo RAVEN" class="brand-logo">
+                <span class="brand-text">RAVEN</span>
+            </a>
+        </div>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu de navegação" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu" id="nav-menu" role="menubar">
+            <li role="none"><a href="/pages/home.html" role="menuitem" class="nav-link"><i class="fas fa-home"></i> Início</a></li>
+            <li role="none"><a href="/pages/loja.html" role="menuitem" class="nav-link active"><i class="fas fa-store"></i> Loja</a></li>
+            <li role="none"><a href="/pages/artists.html" role="menuitem" class="nav-link"><i class="fas fa-star"></i> Artistas</a></li>
+            <li role="none"><a href="/pages/contato.html" role="menuitem" class="nav-link"><i class="fas fa-envelope"></i> Contato</a></li>
+            <li role="none"><a href="/pages/blog.html" role="menuitem" class="nav-link"><i class="fas fa-blog"></i> Blog</a></li>
+            <li role="none"><a href="/pages/game.html" role="menuitem" class="nav-link"><i class="fas fa-gamepad"></i>Game</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="/pages/login.html" class="nav-icon" aria-label="Login"><i class="fas fa-user"></i></a>
+            <a href="/pages/carrinho.html" class="nav-icon" aria-label="Carrinho de compras"><i class="fas fa-shopping-cart"></i></a>
+        </div>
+    </div>
+</nav>
+    <div class="cart-bg"></div>
+    <div class="cart-particles" id="particles-js"></div>
+    
+    <main class="cart-main">
+        <header class="cart-header">
+            <h1>CARRINHO DE COMPRAS</h1>
+            <p>Revise seus itens antes de finalizar a compra</p>
+        </header>
+        
+        <div class="cart-content" id="cart-content">
+            </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <span class="brand-mascot">🐦‍⬛</span>
+                        <h3>RAVEN STUDIO</h3>
+                    </div>
+                    <p>Transformando pele em arte desde 2016. Cada tatuagem conta uma história única.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon" aria-label="Instagram do Raven Studio">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Facebook do Raven Studio">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="TikTok do Raven Studio">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="YouTube do Raven Studio">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>LINKS RÁPIDOS</h4>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#about">Sobre</a></li>
+                        <li><a href="#portfolio">Portfólio</a></li>
+                        <li><a href="#testimonials">Depoimentos</a></li>
+                        <li><a href="#booking">Agendamento</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>CONTATO</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                        <span>Rua das Artes, 123<br>Vila Madalena - São Paulo, SP</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone" aria-hidden="true"></i>
+                        <span>(11) 99999-9999</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <span>contato@ravenstudio.com</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-divider"></div>
+                <div class="footer-copyright">
+                    <p>&copy; 2024 Raven Studio. Todos os direitos reservados.</p>
+                    <p class="footer-love">Feito com <i class="fas fa-heart" aria-hidden="true"></i> para amantes da arte corporal</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+ <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+    <script src="/js/home.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Inicializar partículas
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 } },
+                color: { value: "#3b82f6" },
+                shape: { type: "circle" },
+                opacity: { value: 0.3, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#3b82f6", opacity: 0.2, width: 1 },
+                move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            }
+        });
+
+        class ShoppingCart {
+            constructor() {
+                this.cart = JSON.parse(localStorage.getItem('ravenStudioCart')) || [];
+                this.coupons = {
+                    'RAVEN10': { discount: 0.10, type: 'percentage' },
+                    'STUDIO20': { discount: 0.20, type: 'percentage' },
+                    'DESCONTO50': { discount: 5000, type: 'fixed' }
+                };
+                this.appliedCoupon = null;
+                this.init();
+            }
+
+            init() {
+                this.renderCart();
+                this.setupEventListeners();
+            }
+
+            renderCart() {
+                const container = document.getElementById('cart-content');
+                
+                if (this.cart.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h3>Seu carrinho está vazio</h3>
+                            <p>Adicione alguns produtos incríveis da nossa loja!</p>
+                            <button class="empty-cart-btn" onclick="window.location.href='loja.html'">
+                                <i class="fas fa-store"></i> CONTINUAR COMPRANDO
+                            </button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const cartItemsHtml = this.cart.map(item => `
+                    <div class="cart-item" data-id="${item.id}">
+                        <div class="item-image">
+                            <img src="${item.image}" alt="${item.name}">
+                        </div>
+                        <div class="item-info">
+                            <h3>${item.name}</h3>
+                            <p>Produto profissional para tatuagem</p>
+                        </div>
+                        <div class="item-price">
+                            ${this.formatPrice(item.price)}
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="qty-btn" onclick="cart.updateQuantity('${item.id}', ${item.quantity - 1})">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="qty-input" value="${item.quantity}" min="1" 
+                                   onchange="cart.updateQuantity('${item.id}', this.value)">
+                            <button class="qty-btn" onclick="cart.updateQuantity('${item.id}', ${item.quantity + 1})">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <button class="remove-btn" onclick="cart.removeItem('${item.id}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('');
+
+                const subtotal = this.calculateSubtotal();
+                const shipping = this.calculateShipping(subtotal);
+                const discount = this.calculateDiscount(subtotal);
+                const total = subtotal + shipping - discount;
+
+                container.innerHTML = `
+                    <div class="cart-items">
+                        ${cartItemsHtml}
+                    </div>
+                    <div class="cart-summary">
+                        <h2 class="summary-title">RESUMO DO PEDIDO</h2>
+                        
+                        <div class="summary-row">
+                            <span class="summary-label">Subtotal (${this.cart.length} ${this.cart.length === 1 ? 'item' : 'itens'})</span>
+                            <span class="summary-value">${this.formatPrice(subtotal)}</span>
+                        </div>
+                        
+                        <div class="summary-row">
+                            <span class="summary-label">Frete</span>
+                            <span class="summary-value">${shipping === 0 ? 'GRÁTIS' : this.formatPrice(shipping)}</span>
+                        </div>
+                        
+                        ${discount > 0 ? `
+                            <div class="summary-row">
+                                <span class="summary-label">Desconto (${this.appliedCoupon})</span>
+                                <span class="summary-value" style="color: #22c55e;">-${this.formatPrice(discount)}</span>
+                            </div>
+                        ` : ''}
+                        
+                        <div class="coupon-section">
+                            <div class="coupon-title">
+                                <i class="fas fa-ticket-alt"></i> CUPOM DE DESCONTO
+                            </div>
+                            <div class="coupon-input">
+                                <input type="text" id="coupon-input" placeholder="Digite seu cupom" 
+                                       ${this.appliedCoupon ? `value="${this.appliedCoupon}" disabled` : ''}>
+                                <button class="coupon-btn ${this.appliedCoupon ? 'applied' : ''}" onclick="cart.applyCoupon()">
+                                    ${this.appliedCoupon ? '<i class="fas fa-check"></i> APLICADO' : '<i class="fas fa-tag"></i> APLICAR'}
+                                </button>
+                            </div>
+                            ${this.appliedCoupon ? `
+                                <button class="remove-coupon" onclick="cart.removeCoupon()">
+                                    <i class="fas fa-times"></i> Remover cupom
+                                </button>
+                            ` : ''}
+                        </div>
+                        
+                        <button class="checkout-btn" onclick="cart.goToCheckout()">
+                            <i class="fas fa-credit-card"></i> FINALIZAR COMPRA
+                        </button>
+                        
+                        <button class="continue-shopping" onclick="window.location.href='loja.html'">
+                            <i class="fas fa-arrow-left"></i> Continuar Comprando
+                        </button>
+                    </div>
+                `;
+            }
+
+            goToCheckout() {
+                if (this.cart.length === 0) {
+                    this.showNotification('Seu carrinho está vazio!', 'error');
+                    return;
+                }
+                window.location.href = 'pagamento.html'; // CORRIGIDO PARA pagamento.html
+            }
+
+            updateQuantity(itemId, newQuantity) {
+                newQuantity = parseInt(newQuantity);
+                if (newQuantity < 1) {
+                    this.removeItem(itemId);
+                    return;
+                }
+
+                const item = this.cart.find(item => item.id === itemId);
+                if (item) {
+                    item.quantity = newQuantity;
+                    this.saveCart();
+                    this.renderCart();
+                    this.showNotification('Quantidade atualizada!');
+                }
+            }
+
+            removeItem(itemId) {
+                this.cart = this.cart.filter(item => item.id !== itemId);
+                this.saveCart();
+                this.renderCart();
+                this.showNotification('Item removido do carrinho!');
+            }
+
+            applyCoupon() {
+                if (this.appliedCoupon) return;
+
+                const couponInput = document.getElementById('coupon-input');
+                const couponCode = couponInput.value.toUpperCase().trim();
+
+                if (this.coupons[couponCode]) {
+                    this.appliedCoupon = couponCode;
+                    this.renderCart();
+                    this.showNotification('Cupom aplicado com sucesso!');
+                } else {
+                    this.showNotification('Cupom inválido!', 'error');
+                }
+            }
+
+            removeCoupon() {
+                this.appliedCoupon = null;
+                this.renderCart();
+                this.showNotification('Cupom removido!');
+            }
+
+            calculateSubtotal() {
+                return this.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            }
+
+            calculateShipping(subtotal) {
+                return subtotal >= 20000 ? 0 : 1500;
+            }
+
+            calculateDiscount(subtotal) {
+                if (!this.appliedCoupon) return 0;
+
+                const coupon = this.coupons[this.appliedCoupon];
+                if (coupon.type === 'percentage') {
+                    return Math.floor(subtotal * coupon.discount);
+                } else {
+                    return coupon.discount;
+                }
+            }
+
+            formatPrice(priceInCents) {
+                return (priceInCents / 100).toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2
+                });
+            }
+
+            saveCart() {
+                localStorage.setItem('ravenStudioCart', JSON.stringify(this.cart));
+            }
+
+            showNotification(message, type = 'success') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.innerHTML = `
+                    <i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'check-circle'}"></i> ${message}
+                `;
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease-out';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+
+            setupEventListeners() {
+                // Event listeners são tratados inline no HTML para simplificar
+            }
+        }
+
+        // Inicializar carrinho
+        const cart = new ShoppingCart();
+    </script>
+</body>
+</html>

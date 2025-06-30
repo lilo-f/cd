@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raven Studio - Estúdio de Tatuagem</title>
+    <meta name="description" content="Raven Studio - Estúdio de tatuagem artístico e moderno. Transforme sua pele em arte.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Bebas+Neue&family=Teko:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Adicionar no head -->
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<!-- Adicionar no head para melhorar SEO e acessibilidade -->
+<link rel="canonical" href="https://www.ravenstudio.com" />
+<meta name="description" content="Raven Studio - Estúdio de tatuagem artístico em São Paulo. Especialistas em realismo, blackwork, aquarela e geométrico. Agende sua sessão.">
+<meta property="og:title" content="Raven Studio - Estúdio de Tatuagem Artístico">
+<meta property="og:description" content="Transforme sua pele em arte com nossos talentosos artistas. Agende sua sessão no melhor estúdio de tatuagem de São Paulo.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.ravenstudio.com">
+<meta property="og:image" content="https://www.ravenstudio.com/images/og-image.jpg">
+    <style>
+        /* Botão para voltar ao topo */
+        .back-to-top {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #8a2be2, #4b0082);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 999;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(45deg, #4b0082, #8a2be2);
+        }
+        
+        .back-to-top.show {
+            display: flex;
+        }
+
+        /* Chat Widget Styles */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chat-toggle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #8a2be2, #4b0082);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 1.5rem;
+            border: none;
+        }
+
+        .chat-toggle:hover {
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #4b0082, #8a2be2);
+        }
+
+        .chat-container {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 450px;
+            background: #1a1a1a;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            display: none;
+            flex-direction: column;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .chat-container.active {
+            display: flex;
+        }
+
+        .chat-header {
+            padding: 1rem;
+            background: linear-gradient(45deg, #4b0082, #8a2be2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+        }
+
+        .chat-title i {
+            color: #fff;
+        }
+
+        .chat-title h4 {
+            font-size: 1rem;
+            margin: 0;
+            font-family: 'Teko', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .chat-title span {
+            font-size: 0.8rem;
+            color: #ccc;
+            font-family: 'Teko', sans-serif;
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .chat-content {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background-color: #121212;
+        }
+
+        .chat-categories p {
+            color: #ccc;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            font-family: 'Teko', sans-serif;
+        }
+
+        .category-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .category-btn {
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: left;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.1rem;
+            border: none;
+        }
+
+        .category-btn:hover {
+            background: rgba(138, 43, 226, 0.3);
+        }
+
+        .back-button {
+            margin-bottom: 1rem;
+        }
+
+        .back-button button {
+            background: none;
+            border: none;
+            color: #8a2be2;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Teko', sans-serif;
+            padding: 0;
+        }
+
+        .back-button button:hover {
+            text-decoration: underline;
+        }
+
+        .question-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: left;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            border: none;
+            font-family: 'Teko', sans-serif;
+        }
+
+        .question-btn:hover {
+            background: rgba(138, 43, 226, 0.3);
+        }
+
+        .answer-content {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            color: #ccc;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .answer-content h5 {
+            color: #8a2be2;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-family: 'Teko', sans-serif;
+        }
+
+        .answer-content p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            font-family: 'Teko', sans-serif;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: linear-gradient(45deg, #8a2be2, #4b0082);
+            color: white;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            margin-top: 1rem;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            background: linear-gradient(45deg, #4b0082, #8a2be2);
+        }
+
+        #questions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 480px) {
+            .chat-container {
+                width: 280px;
+                right: -10px;
+            }
+            
+            .back-to-top {
+                left: 10px;
+                bottom: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Adicionar logo após a abertura do body -->
+<a href="#main" class="skip-link">Pular para conteúdo principal</a>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <span class="loading-mascot">🐦‍⬛</span>
+                <h2>RAVEN STUDIO</h2>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p class="loading-text">Preparando sua experiência...</p>
+        </div>
+    </div>
+
+<!-- Navigation -->
+  <nav id="navbar" class="navbar" role="navigation" aria-label="Menu principal">
+    <div class="nav-container">
+        <div class="nav-brand">
+            <a href="/pages/home.html" class="brand-link">
+                <img src="/img/logo.png" alt="Logo RAVEN" class="brand-logo">
+                <span class="brand-text">RAVEN</span>
+            </a>
+        </div>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu de navegação" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu" id="nav-menu" role="menubar">
+            <li role="none"><a href="/pages/home.html" role="menuitem" class="nav-link"><i class="fas fa-home"></i> Início</a></li>
+            <li role="none"><a href="/pages/loja.html" role="menuitem" class="nav-link active"><i class="fas fa-store"></i> Loja</a></li>
+            <li role="none"><a href="/pages/artists.html" role="menuitem" class="nav-link"><i class="fas fa-star"></i> Artistas</a></li>
+            <li role="none"><a href="/pages/contato.html" role="menuitem" class="nav-link"><i class="fas fa-envelope"></i> Contato</a></li>
+            <li role="none"><a href="/pages/blog.html" role="menuitem" class="nav-link"><i class="fas fa-blog"></i> Blog</a></li>
+            <li role="none"><a href="/pages/game.html" role="menuitem" class="nav-link"><i class="fas fa-gamepad"></i>Game</a></li>
+        </ul>
+        <div class="nav-icons">
+          <div class="nav-icons">
+    <a href="/pages/login.html" class="nav-icon" aria-label="Login">
+        <i class="fas fa-user"></i>
+    </a>
+    <a href="/pages/carrinho.html" class="nav-icon" aria-label="Carrinho de compras">
+        <i class="fas fa-shopping-cart"></i>
+    </a>
+</div>
+        </div>
+    </div>
+</nav>
+    <!-- Interactive Discount Modal -->
+    <div id="discount-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close" aria-label="Fechar modal">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="discount-game">
+                <h2 id="modal-title">ESCOLHA SEU PRESENTE!</h2>
+                <p id="modal-description">Selecione uma das opções e raspe para revelar seu desconto especial</p>
+                
+                <div class="gift-selection" id="gift-selection">
+                    <div class="gift-option" data-discount="10" tabindex="0" role="button" aria-label="Presente misterioso 1">
+                        <div class="gift-box">
+                            <i class="fas fa-gift"></i>
+                            <span>PRESENTE 1</span>
+                        </div>
+                    </div>
+                    <div class="gift-option" data-discount="15" tabindex="0" role="button" aria-label="Presente misterioso 2">
+                        <div class="gift-box">
+                            <i class="fas fa-gift"></i>
+                            <span>PRESENTE 2</span>
+                        </div>
+                    </div>
+                    <div class="gift-option" data-discount="20" tabindex="0" role="button" aria-label="Presente misterioso 3">
+                        <div class="gift-box">
+                            <i class="fas fa-gift"></i>
+                            <span>PRESENTE 3</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="scratch-game" id="scratch-game" style="display: none;">
+                    <h3>RASPE PARA REVELAR!</h3>
+                    <div class="scratch-card" id="scratch-card" tabindex="0" role="button" aria-label="Raspadinha para revelar desconto">
+                        <canvas id="scratch-canvas" width="300" height="150"></canvas>
+                        <div class="scratch-content">
+                            <span class="discount-value" id="final-discount"></span>
+                            <p>DE DESCONTO!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="discount-result" id="discount-result" style="display: none;">
+                    <h3>PARABÉNS!</h3>
+                    <p>Você ganhou <span id="discount-amount"></span> de desconto!</p>
+                    <form id="email-form" class="email-form">
+                        <div class="input-group">
+                            <input 
+                                type="email" 
+                                id="email-input" 
+                                placeholder="Digite seu e-mail para receber o cupom" 
+                                required 
+                                autocomplete="email"
+                                aria-label="Digite seu e-mail"
+                            >
+                            <button type="submit" class="claim-button">
+                                <i class="fas fa-gift"></i>
+                                RESGATAR
+                            </button>
+                        </div>
+                        <div id="email-error" class="error-message" role="alert" aria-live="polite"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <main id="main" role="main"></main>
+        <!-- Hero Section -->
+        <section id="home" class="hero" role="banner">
+            <div class="hero-background">
+                <div class="neon-grid"></div>
+                <div class="floating-elements">
+                    <div class="floating-element"></div>
+                    <div class="floating-element"></div>
+                    <div class="floating-element"></div>
+                </div>
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-word">TRANSFORME</span>
+                    <span class="title-word highlight">SUA PELE</span>
+                    <span class="title-word">EM ARTE</span>
+                </h1>
+                <p class="hero-subtitle">No Raven Studio, cada tatuagem conta uma história única. Venha descobrir a sua.</p>
+                <a href="#booking" class="cta-button">
+                    <span>AGENDE SUA TATUAGEM</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="scroll-indicator" aria-hidden="true">
+                <span>EXPLORE</span>
+                <div class="scroll-arrow">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- About Section -->
+        <section id="about" class="about reveal-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">SOBRE O RAVEN STUDIO</h2>
+                    <div class="title-underline"></div>
+                    <p class="section-subtitle">Onde a arte encontra a pele</p>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Há mais de 8 anos, o Raven Studio é sinônimo de excelência em arte corporal. Nossa equipe de artistas especializados transforma ideias em obras de arte permanentes, respeitando sempre a individualidade e história de cada cliente.</p>
+                        <p>Utilizamos apenas equipamentos de última geração e produtos de qualidade superior, garantindo não apenas o resultado estético perfeito, mas também a máxima segurança em todos os procedimentos.</p>
+                        <ul class="about-features">
+                            <li><i class="fas fa-palette" aria-hidden="true"></i> Artistas especializados e certificados</li>
+                            <li><i class="fas fa-shield-alt" aria-hidden="true"></i> Protocolos rigorosos de segurança</li>
+                            <li><i class="fas fa-gem" aria-hidden="true"></i> Ambiente exclusivo e acolhedor</li>
+                            <li><i class="fas fa-user-friends" aria-hidden="true"></i> Atendimento personalizado</li>
+                        </ul>
+                    </div>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Clientes Satisfeitos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Anos de Experiência</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Segurança</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+        
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="portfolio reveal-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">NOSSO PORTFÓLIO</h2>
+                    <div class="title-underline"></div>
+                    <p class="section-subtitle">Cada peça é única, assim como você</p>
+                </div>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item" tabindex="0" role="img" aria-label="Tatuagem de dragão em estilo realista">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1565058379802-bbe93b2f703a?w=400&h=400&fit=crop" alt="Tatuagem artística" loading="lazy">
+                            <div class="image-overlay">
+                                <i class="fas fa-search-plus" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Dragão Realista</h3>
+                            <p>Estilo: Realismo</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" tabindex="0" role="img" aria-label="Tatuagem floral em aquarela">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=400&h=400&fit=crop" alt="Tatuagem floral" loading="lazy">
+                            <div class="image-overlay">
+                                <i class="fas fa-search-plus" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Flores Aquarela</h3>
+                            <p>Estilo: Aquarela</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" tabindex="0" role="img" aria-label="Tatuagem geométrica moderna">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400&h=400&fit=crop" alt="Tatuagem geométrica" loading="lazy">
+                            <div class="image-overlay">
+                                <i class="fas fa-search-plus" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Padrões Geométricos</h3>
+                            <p>Estilo: Geométrico</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" tabindex="0" role="img" aria-label="Tatuagem de corvo em blackwork">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1611070264797-2b2c0cb87fe1?w=400&h=400&fit=crop" alt="Tatuagem de corvo" loading="lazy">
+                            <div class="image-overlay">
+                                <i class="fas fa-search-plus" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Raven Blackwork</h3>
+                            <p>Estilo: Blackwork</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" tabindex="0" role="img" aria-label="Tatuagem tribal moderna">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&h=400&fit=crop" alt="Tatuagem tribal" loading="lazy">
+                            <div class="image-overlay">
+                                <i class="fas fa-search-plus" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Tribal Moderno</h3>
+                            <p>Estilo: Tribal</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" tabindex="0" role="img" aria-label="Tatuagem minimalista">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=400&h=400&fit=crop" alt="Tatuagem minimalista" loading="lazy">
+                            <div class="image-overlay">
+                                <i class="fas fa-search-plus" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Arte Minimalista</h3>
+                            <p>Estilo: Minimalista</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    
+<!-- Quiz Profissional -->
+<section id="tattoo-quiz" class="pro-quiz">
+    <div class="container">
+        <!-- Introdução -->
+        <div class="quiz-intro" id="quiz-intro">
+            <div class="intro-content">
+                <h2>DESCUBRA SEU ESTILO DE TATUAGEM</h2>
+                <p>Responda nosso quiz e encontre o estilo que combina com sua personalidade</p>
+                <button id="start-quiz" class="cta-button">
+                    <span>INICIAR QUIZ</span>
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Perguntas -->
+        <div class="quiz-questions" id="quiz-questions" style="display:none">
+            <div class="quiz-header">
+                <div class="progress-container">
+                    <div class="progress-bar" id="quiz-progress"></div>
+                </div>
+                <h3 id="current-question">Pergunta <span id="current-q-number">1</span>/<span id="total-questions">4</span></h3>
+            </div>
+
+            <div class="question-container" id="question-container">
+                <!-- Perguntas serão inseridas aqui via JS -->
+            </div>
+        </div>
+
+        <!-- Resultado -->
+        <div class="quiz-result" id="quiz-result" style="display:none">
+            <div class="result-content">
+                <h3>SEU ESTILO IDEAL É:</h3>
+                <div class="result-style" id="result-style"></div>
+                <p id="result-description"></p>
+                
+                <div class="style-features">
+                    <h4>CARACTERÍSTICAS PRINCIPAIS:</h4>
+                    <ul id="style-features"></ul>
+                </div>
+
+                <div class="result-gallery" id="result-gallery"></div>
+                
+                <div class="artist-match">
+                    <h4>ARTISTAS RECOMENDADOS:</h4>
+                    <div id="artist-match"></div>
+                </div>
+
+                <button id="restart-quiz" class="cta-button">
+                    <span>FAZER NOVAMENTE</span>
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12,4C14.1,4 16.1,4.8 17.6,6.3C20.7,9.4 20.7,14.5 17.6,17.6C15.8,19.5 13.3,20.2 10.9,19.9L11.4,17.9C13.1,18.1 14.9,17.5 16.2,16.2C18.5,13.9 18.5,10.1 16.2,7.8C15.1,6.7 13.5,6 12,6V10.6L7,5.6L12,0.6V4M6.3,17.6C3.7,15 3.3,11 5.1,7.9L6.6,9.4C5.5,11.6 5.9,14.4 7.8,16.2C8.3,16.7 8.9,17.1 9.6,17.4L9,19.4C8,19 7.1,18.4 6.3,17.6Z"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="tattoo-gallery" class="gallery-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">NOSSA GALERIA</h2>
+            <div class="title-underline"></div>
+            <p class="section-subtitle">Explore nossos trabalhos incríveis, filtrados por estilo, artista ou local do corpo.</p>
+        </div>
+
+        <div class="filter-buttons" role="group" aria-label="Filtros da galeria de tatuagens">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="realismo">Realismo</button>
+            <button class="filter-btn" data-filter="blackwork">Blackwork</button>
+            <button class="filter-btn" data-filter="aquarela">Aquarela</button>
+            <button class="filter-btn" data-filter="geometria">Geométrico</button>
+            <button class="filter-btn" data-filter="artist-joao">João Silva</button>
+            <button class="filter-btn" data-filter="artist-maria">Maria Souza</button>
+            <button class="filter-btn" data-filter="arm">Braço</button>
+            <button class="filter-btn" data-filter="leg">Perna</button>
+            <button class="filter-btn" data-filter="back">Costas</button>
+        </div>
+
+        <div class="gallery-grid" id="gallery-grid">
+            <div class="gallery-item" data-style="realismo" data-artist="joao" data-body-part="arm">
+                <img src="https://via.placeholder.com/400x400/000000/FFFFFF?text=Tattoo+Realismo+1" alt="Tatuagem de realismo no braço por João Silva">
+                <div class="item-overlay">
+                    <h3>Realismo - Braço</h3>
+                    <p>Artista: João Silva</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-style="blackwork" data-artist="maria" data-body-part="leg">
+                <img src="https://via.placeholder.com/400x400/000000/FFFFFF?text=Tattoo+Blackwork+1" alt="Tatuagem blackwork na perna por Maria Souza">
+                <div class="item-overlay">
+                    <h3>Blackwork - Perna</h3>
+                    <p>Artista: Maria Souza</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-style="aquarela" data-artist="joao" data-body-part="back">
+                <img src="https://via.placeholder.com/400x400/000000/FFFFFF?text=Tattoo+Aquarela+1" alt="Tatuagem aquarela nas costas por João Silva">
+                <div class="item-overlay">
+                    <h3>Aquarela - Costas</h3>
+                    <p>Artista: João Silva</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-style="geometria" data-artist="maria" data-body-part="arm">
+                <img src="https://via.placeholder.com/400x400/000000/FFFFFF?text=Tattoo+Geometria+1" alt="Tatuagem geométrica no braço por Maria Souza">
+                <div class="item-overlay">
+                    <h3>Geométrico - Braço</h3>
+                    <p>Artista: Maria Souza</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-style="realismo" data-artist="maria" data-body-part="leg">
+                <img src="https://via.placeholder.com/400x400/000000/FFFFFF?text=Tattoo+Realismo+2" alt="Tatuagem de realismo na perna por Maria Souza">
+                <div class="item-overlay">
+                    <h3>Realismo - Perna</h3>
+                    <p>Artista: Maria Souza</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-style="blackwork" data-artist="joao" data-body-part="back">
+                <img src="https://via.placeholder.com/400x400/000000/FFFFFF?text=Tattoo+Blackwork+2" alt="Tatuagem blackwork nas costas por João Silva">
+                <div class="item-overlay">
+                    <h3>Blackwork - Costas</h3>
+                    <p>Artista: João Silva</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="/js/script.js"></script>
+
+
+        <!-- Booking Section -->
+      <section id="artists" class="artists reveal-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">CONHEÇA NOSSOS ARTISTAS</h2>
+      <div class="title-underline"></div>
+      <p class="section-subtitle">Talentos especializados em diferentes estilos</p>
+    </div>
+    <div class="artists-grid">
+      <div class="artist-card" tabindex="0">
+        <div class="artist-image">
+          <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&h=400&fit=crop" alt="Artista Lucas - Especialista em Realismo" loading="lazy">
+        </div>
+        <div class="artist-info">
+          <h3>LUCAS</h3>
+          <p class="artist-specialty">Realismo & Retratos</p>
+          <p class="artist-bio">10 anos de experiência transformando ideias em obras de arte hiper-realistas.</p>
+          <a href="#booking" class="artist-button">AGENDAR COM LUCAS</a>
+        </div>
+      </div>
+      
+      <div class="artist-card" tabindex="0">
+        <div class="artist-image">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" alt="Artista Rafael - Especialista em Blackwork" loading="lazy">
+        </div>
+        <div class="artist-info">
+          <h3>RAFAEL</h3>
+          <p class="artist-specialty">Blackwork & Geométrico</p>
+          <p class="artist-bio">Mestre em designs precisos e padrões geométricos complexos.</p>
+          <a href="#booking" class="artist-button">AGENDAR COM RAFAEL</a>
+        </div>
+      </div>
+      
+      <div class="artist-card" tabindex="0">
+        <div class="artist-image">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop" alt="Artista Ana - Especialista em Aquarela" loading="lazy">
+        </div>
+        <div class="artist-info">
+          <h3>ANA</h3>
+          <p class="artist-specialty">Aquarela & Florais</p>
+          <p class="artist-bio">Transforma sua pele em pinturas delicadas e coloridas.</p>
+          <a href="#booking" class="artist-button">AGENDAR COM ANA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact reveal-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">VISITE-NOS</h2>
+                    <div class="title-underline"></div>
+                    <p class="section-subtitle">Sua nova tatuagem está a um passo de distância</p>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>ENDEREÇO</h3>
+                                <p>Rua das Artes, 123<br>Vila Madalena - São Paulo, SP<br>CEP: 01234-567</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock" aria-hidden="true"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>HORÁRIO DE FUNCIONAMENTO</h3>
+                                <p>Segunda a Sexta: 10h às 20h<br>Sábado: 10h às 18h<br>Domingo: Fechado</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone" aria-hidden="true"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>CONTATO</h3>
+                                <p>Telefone: (11) 99999-9999<br>WhatsApp: (11) 99999-9999<br>E-mail: contato@ravenstudio.com</p>
+                            </div>
+                        </div>
+                    </div>
+                  
+                     <div class="map-container">
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.3764159442626!2d-46.6930709242393!3d-23.55493047880085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDMzJzE3LjgiUyA0NsKwNDEnMzEuOCJX!5e0!3m2!1sen!2sbr!4v1620000000000!5m2!1sen!2sbr" 
+    width="600" 
+    height="450" 
+    style="border:0;" 
+    allowfullscreen="" 
+    loading="lazy"
+    aria-label="Mapa da localização do Raven Studio na Vila Madalena"
+    title="Localização do Raven Studio">
+  </iframe>
+</div>
+                 
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <span class="brand-mascot">🐦‍⬛</span>
+                        <h3>RAVEN STUDIO</h3>
+                    </div>
+                    <p>Transformando pele em arte desde 2016. Cada tatuagem conta uma história única.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon" aria-label="Instagram do Raven Studio">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Facebook do Raven Studio">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="TikTok do Raven Studio">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="YouTube do Raven Studio">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>LINKS RÁPIDOS</h4>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#about">Sobre</a></li>
+                        <li><a href="#portfolio">Portfólio</a></li>
+                        <li><a href="#testimonials">Depoimentos</a></li>
+                        <li><a href="#booking">Agendamento</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>CONTATO</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                        <span>Rua das Artes, 123<br>Vila Madalena - São Paulo, SP</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone" aria-hidden="true"></i>
+                        <span>(11) 99999-9999</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <span>contato@ravenstudio.com</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-divider"></div>
+                <div class="footer-copyright">
+                    <p>&copy; 2024 Raven Studio. Todos os direitos reservados.</p>
+                    <p class="footer-love">Feito com <i class="fas fa-heart" aria-hidden="true"></i> para amantes da arte corporal</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <!-- Botão para voltar ao topo -->
+    <button class="back-to-top" id="backToTop" title="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <button class="chat-toggle" id="chatToggle">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <i class="fas fa-robot"></i>
+                    <div>
+                        <h4>RavenBot</h4>
+                        <span>Online • FAQ</span>
+                    </div>
+                </div>
+                <button class="chat-close" id="chatClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-content" id="chatContent">
+                <div class="chat-categories" id="chatCategories">
+                    <p>Escolha uma categoria para ver as perguntas frequentes:</p>
+                    <div class="category-buttons">
+                        <button class="category-btn" onclick="showCategory('precos')">Preços</button>
+                        <button class="category-btn" onclick="showCategory('procedimento')">Procedimento</button>
+                        <button class="category-btn" onclick="showCategory('cuidados')">Cuidados</button>
+                        <button class="category-btn" onclick="showCategory('estilos')">Estilos</button>
+                        <button class="category-btn" onclick="showCategory('agendamento')">Agendamento</button>
+                        <button class="category-btn" onclick="showCategory('tempo')">Tempo</button>
+                    </div>
+                </div>
+                <div class="chat-questions" id="chatQuestions" style="display: none;">
+                    <div class="back-button">
+                        <button onclick="showCategories()">← Voltar</button>
+                    </div>
+                    <div id="questionsList"></div>
+                </div>
+                <div class="chat-answer" id="chatAnswer" style="display: none;">
+                    <div class="back-button">
+                        <button onclick="showQuestions()">← Voltar</button>
+                    </div>
+                    <div id="answerContent"></div>
+                    <button class="btn-primary" onclick="showCategories()">Ver Outras Perguntas</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+  <script src="/js/home.js"></script>
+    <script>
+        // FAQ Data
+        const faqData = {
+            precos: [
+                {
+                    question: "Quanto custa uma tatuagem?",
+                    answer: "Os preços variam de R$ 200 a R$ 2000, dependendo do tamanho e complexidade. Tatuagens pequenas: R$ 200-500, médias: R$ 500-1000, grandes: acima de R$ 1000."
+                }
+            ],
+            procedimento: [
+                {
+                    question: "Dói muito fazer tatuagem?",
+                    answer: "A dor varia conforme a região do corpo e tolerância pessoal. Áreas ósseas doem mais. A sensação é similar a uma queimação contínua. Usamos técnicas para minimizar o desconforto."
+                }
+            ],
+            cuidados: [
+                {
+                    question: "Como cuidar da tatuagem?",
+                    answer: "Mantenha limpa e hidratada com pomada cicatrizante por 7-10 dias. Evite sol direto, piscina e mar por 15 dias. Não retire as casquinhas naturalmente formadas."
+                }
+            ],
+            estilos: [
+                {
+                    question: "Que estilos vocês fazem?",
+                    answer: "Oferecemos: Tradicional/Old School, Realismo, Minimalista, Aquarela, Geométrico, Blackwork, Fine Line. Cada artista tem especialidades específicas."
+                }
+            ],
+            agendamento: [
+                {
+                    question: "Como funciona o agendamento?",
+                    answer: "Escolha o artista, data e horário disponível. Pedimos entrada de 50% do valor total. Você receberá confirmação por e-mail."
+                }
+            ],
+            tempo: [
+                {
+                    question: "Quanto tempo demora?",
+                    answer: "Tatuagens pequenas: 1-2h, médias: 2-4h, grandes podem precisar múltiplas sessões. O tempo varia conforme complexidade e detalhamento."
+                }
+            ]
+        };
+
+        // Chat Widget Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatToggle = document.getElementById('chatToggle');
+            const chatContainer = document.getElementById('chatContainer');
+            const chatClose = document.getElementById('chatClose');
+            
+            // Botão de voltar ao topo
+            const backToTopButton = document.getElementById('backToTop');
+            
+            // Mostrar/ocultar botão de voltar ao topo
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+            });
+            
+            // Voltar ao topo
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Abrir/fechar chat
+            chatToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                chatContainer.classList.toggle('active');
+            });
+            
+            chatClose.addEventListener('click', function() {
+                chatContainer.classList.remove('active');
+            });
+            
+            // Fechar chat ao clicar fora
+            document.addEventListener('click', function(e) {
+                if (!chatContainer.contains(e.target) && !chatToggle.contains(e.target)) {
+                    chatContainer.classList.remove('active');
+                }
+            });
+            
+            // Evitar fechar ao clicar dentro do chat
+            chatContainer.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+        
+        function showCategories() {
+            document.getElementById('chatCategories').style.display = 'block';
+            document.getElementById('chatQuestions').style.display = 'none';
+            document.getElementById('chatAnswer').style.display = 'none';
+            currentState = 'categories';
+            currentCategory = null;
+        }
+        
+        function showCategory(category) {
+            currentCategory = category;
+            currentState = 'questions';
+            
+            const questionsContainer = document.getElementById('questionsList');
+            const categoryData = faqData[category] || [];
+            
+            questionsContainer.innerHTML = '';
+            
+            categoryData.forEach((faq, index) => {
+                const questionBtn = document.createElement('button');
+                questionBtn.className = 'question-btn';
+                questionBtn.textContent = faq.question;
+                questionBtn.onclick = () => showAnswer(category, index);
+                questionsContainer.appendChild(questionBtn);
+            });
+            
+            document.getElementById('chatCategories').style.display = 'none';
+            document.getElementById('chatQuestions').style.display = 'block';
+            document.getElementById('chatAnswer').style.display = 'none';
+        }
+        
+        function showQuestions() {
+            if (currentCategory) {
+                showCategory(currentCategory);
+            } else {
+                showCategories();
+            }
+        }
+        
+        function showAnswer(category, questionIndex) {
+            const faq = faqData[category][questionIndex];
+            const answerContent = document.getElementById('answerContent');
+            
+            answerContent.innerHTML = `
+                <div class="answer-content">
+                    <h5>Pergunta:</h5>
+                    <p>${faq.question}</p>
+                    <h5 style="color: #8a2be2; margin-top: 1rem;">Resposta:</h5>
+                    <p>${faq.answer}</p>
+                </div>
+            `;
+            
+            document.getElementById('chatCategories').style.display = 'none';
+            document.getElementById('chatQuestions').style.display = 'none';
+            document.getElementById('chatAnswer').style.display = 'block';
+            currentState = 'answer';
+        }
+        
+        // Variáveis de estado do chat
+        let currentCategory = null;
+        let currentState = 'categories';
+    </script>
+</body>
+</html>

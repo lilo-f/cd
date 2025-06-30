@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos Artistas - Raven Studio</title>
+    <meta name="description" content="Conheça nossa equipe de artistas especializados em diferentes estilos de tatuagem no Raven Studio.">
+    <link rel="stylesheet" href="/css/artistas.css">
+       <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Bebas+Neue&family=Teko:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+   
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar" role="navigation" aria-label="Menu principal">
+    <div class="nav-container">
+        <div class="nav-brand">
+            <a href="/pages/home.html" class="brand-link">
+                <img src="/img/logo.png" alt="Logo RAVEN" class="brand-logo">
+                <span class="brand-text">RAVEN</span>
+            </a>
+        </div>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu de navegação" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu" id="nav-menu" role="menubar">
+            <li role="none"><a href="/pages/home.html" role="menuitem" class="nav-link"><i class="fas fa-home"></i> Início</a></li>
+            <li role="none"><a href="/pages/loja.html" role="menuitem" class="nav-link active"><i class="fas fa-store"></i> Loja</a></li>
+            <li role="none"><a href="/pages/artists.html" role="menuitem" class="nav-link"><i class="fas fa-star"></i> Artistas</a></li>
+            <li role="none"><a href="/pages/contato.html" role="menuitem" class="nav-link"><i class="fas fa-envelope"></i> Contato</a></li>
+            <li role="none"><a href="/pages/blog.html" role="menuitem" class="nav-link"><i class="fas fa-blog"></i> Blog</a></li>
+            <li role="none"><a href="/pages/game.html" role="menuitem" class="nav-link"><i class="fas fa-gamepad"></i>Game</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="/pages/login.html" class="nav-icon" aria-label="Login"><i class="fas fa-user"></i></a>
+            <a href="/pages/carrinho.html" class="nav-icon" aria-label="Carrinho de compras"><i class="fas fa-shopping-cart"></i></a>
+        </div>
+    </div>
+</nav>
+    <!-- Main Content -->
+    <main id="main">
+        <!-- Hero Section -->
+        <section class="hero artist-hero" role="banner">
+            <div class="hero-background">
+                <div class="neon-grid"></div>
+                <div class="floating-elements">
+                    <div class="floating-element"></div>
+                    <div class="floating-element"></div>
+                    <div class="floating-element"></div>
+                </div>
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-word">CONHEÇA</span>
+                    <span class="title-word highlight">NOSSOS</span>
+                    <span class="title-word">ARTISTAS</span>
+                </h1>
+                <p class="hero-subtitle">Talentos especializados em diferentes estilos, prontos para transformar sua visão em arte permanente.</p>
+            </div>
+            <div class="scroll-indicator" aria-hidden="true">
+                <span>EXPLORE</span>
+                <div class="scroll-arrow">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Artists Grid Section -->
+        <section id="artists" class="artists reveal-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">NOSSA EQUIPE</h2>
+                    <div class="title-underline"></div>
+                    <p class="section-subtitle">Cada artista com seu estilo único e especialização</p>
+                </div>
+                
+                <div class="artists-grid">
+                    <!-- Artist 1 -->
+                    <div class="artist-card" tabindex="0" onclick="window.location.href='/artist-lucas.html'">
+                        <div class="artist-image">
+                            <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&h=400&fit=crop" alt="Artista Lucas - Especialista em Realismo" loading="lazy">
+                        </div>
+                        <div class="artist-info">
+                            <h3>LUCAS</h3>
+                            <p class="artist-specialty">Realismo & Retratos</p>
+                            <p class="artist-bio">10 anos transformando ideias em obras hiper-realistas.</p>
+                          
+                            <a href="/artist-lucas.html" class="artist-button">VER PORTFÓLIO</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Artist 2 -->
+                    <div class="artist-card" tabindex="0" onclick="window.location.href='/artist-rafael.html'">
+                        <div class="artist-image">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" alt="Artista Rafael - Especialista em Blackwork" loading="lazy">
+                        </div>
+                        <div class="artist-info">
+                            <h3>RAFAEL</h3>
+                            <p class="artist-specialty">Blackwork & Geométrico</p>
+                            <p class="artist-bio">Mestre em designs precisos e padrões complexos.</p>
+                          
+                            <a href="/artist-rafael.html" class="artist-button">VER PORTFÓLIO</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Artist 3 -->
+                    <div class="artist-card" tabindex="0" onclick="window.location.href='/artist-ana.html'">
+                        <div class="artist-image">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop" alt="Artista Ana - Especialista em Aquarela" loading="lazy">
+                        </div>
+                        <div class="artist-info">
+                            <h3>ANA</h3>
+                            <p class="artist-specialty">Aquarela & Florais</p>
+                            <p class="artist-bio">Transforma sua pele em pinturas delicadas e coloridas.</p>
+                           
+                            <a href="/artist-ana.html" class="artist-button">VER PORTFÓLIO</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Artist 4 -->
+                    <div class="artist-card" tabindex="0" onclick="window.location.href='/artist-marcos.html'">
+                        <div class="artist-image">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop" alt="Artista Marcos - Especialista em Tribal" loading="lazy">
+                        </div>
+                        <div class="artist-info">
+                            <h3>MARCOS</h3>
+                            <p class="artist-specialty">Tribal & Maori</p>
+                            <p class="artist-bio">Especialista em designs tribais autênticos e modernos.</p>
+                         
+                            <a href="/artist-marcos.html" class="artist-button">VER PORTFÓLIO</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Artist 5 -->
+                    <div class="artist-card" tabindex="0" onclick="window.location.href='/artist-carla.html'">
+                        <div class="artist-image">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop" alt="Artista Carla - Especialista em Minimalista" loading="lazy">
+                        </div>
+                        <div class="artist-info">
+                            <h3>CARLA</h3>
+                            <p class="artist-specialty">Minimalista & Linha Fina</p>
+                            <p class="artist-bio">Arte delicada e significativa com traços precisos.</p>
+                           
+                            <a href="/artist-carla.html" class="artist-button">VER PORTFÓLIO</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Artist 6 -->
+                    <div class="artist-card" tabindex="0" onclick="window.location.href='/artist-rodrigo.html'">
+                        <div class="artist-image">
+                            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&h=400&fit=crop" alt="Artista Rodrigo - Especialista em Old School" loading="lazy">
+                        </div>
+                        <div class="artist-info">
+                            <h3>RODRIGO</h3>
+                            <p class="artist-specialty">Old School & Tradicional</p>
+                            <p class="artist-bio">Técnicas clássicas com um toque contemporâneo.</p>
+                           
+                            <a href="/artist-rodrigo.html" class="artist-button">VER PORTFÓLIO</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <span class="brand-mascot">🐦‍⬛</span>
+                        <h3>RAVEN STUDIO</h3>
+                    </div>
+                    <p>Transformando pele em arte desde 2016. Cada tatuagem conta uma história única.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon" aria-label="Instagram do Raven Studio">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Facebook do Raven Studio">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="TikTok do Raven Studio">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="YouTube do Raven Studio">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>LINKS RÁPIDOS</h4>
+                    <ul>
+                        <li><a href="/">Início</a></li>
+                        <li><a href="/artists.html">Artistas</a></li>
+                        <li><a href="/portfolio.html">Portfólio</a></li>
+                        <li><a href="#testimonials">Depoimentos</a></li>
+                        <li><a href="#booking">Agendamento</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>CONTATO</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                        <span>Rua das Artes, 123<br>Vila Madalena - São Paulo, SP</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone" aria-hidden="true"></i>
+                        <span>(11) 99999-9999</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <span>contato@ravenstudio.com</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-divider"></div>
+                <div class="footer-copyright">
+                    <p>&copy; 2024 Raven Studio. Todos os direitos reservados.</p>
+                    <p class="footer-love">Feito com <i class="fas fa-heart" aria-hidden="true"></i> para amantes da arte corporal</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+ <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+    <script src="/js/home.js"></script>
+    <script>
+        // Script específico para a página de artistas
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adiciona efeito de hover nos cards de artista
+            const artistCards = document.querySelectorAll('.artist-card');
+            
+            artistCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-10px)';
+                    card.style.boxShadow = '0 15px 30px rgba(0, 245, 255, 0.3)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                    card.style.boxShadow = '0 5px 15px rgba(0, 245, 255, 0.2)';
+                });
+                
+                // Acessibilidade - teclado
+                card.addEventListener('focus', () => {
+                    card.style.transform = 'translateY(-10px)';
+                    card.style.boxShadow = '0 15px 30px rgba(0, 245, 255, 0.3)';
+                });
+                
+                card.addEventListener('blur', () => {
+                    card.style.transform = 'translateY(0)';
+                    card.style.boxShadow = '0 5px 15px rgba(0, 245, 255, 0.2)';
+                });
+                
+                // Click/touch
+                card.addEventListener('click', function() {
+                    // Navegação já está no HTML via onclick
+                });
+                
+                // Teclado
+                card.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        window.location.href = this.querySelector('a').href;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
