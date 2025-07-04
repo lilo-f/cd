@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultDescriptionElement = document.getElementById('result-description');
     const styleFeaturesElement = document.getElementById('style-features');
     const resultGalleryElement = document.getElementById('result-gallery');
-    const artistMatchElement = document.getElementById('artist-match');
+    const artistMatchElement = document.getElementById('artist-match'); // Container para os artistas
 
     let currentQuestion = 0;
     let userAnswers = [];
@@ -150,6 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 scores: {
                     tradicional: 2,
                     old_school: 2
+                
                 }
             }, {
                 text: "Criativo e colorido.",
@@ -549,27 +550,30 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        let bestMatch = '';
-        let maxScore = -1;
+        // Get top N styles
+        const sortedStyles = Object.entries(styleScores).sort(([, scoreA], [, scoreB]) => scoreB - scoreA);
+        const topStyles = sortedStyles.slice(0, 3); // Get top 3 styles
 
-        for (const style in styleScores) {
-            if (styleScores[style] > maxScore) {
-                maxScore = styleScores[style];
-                bestMatch = style;
-            } else if (styleScores[style] === maxScore) {
-                // Tie-breaking: if scores are equal, prefer the one that appeared first
-                // Or you can add more complex logic, e.g., random, or specific preference
+        const recommendedArtists = new Map(); // Use a Map to store unique artists and their details
+
+        topStyles.forEach(([styleKey, score]) => {
+            const result = tattooQuiz.results[styleKey];
+            if (result && result.artist) {
+                const artistId = result.artist;
+                if (!recommendedArtists.has(artistId)) {
+                    recommendedArtists.set(artistId, tattooQuiz.artists[artistId]);
+                }
             }
-        }
+        });
 
-        displayResult(bestMatch);
+        displayResult(sortedStyles[0][0], Array.from(recommendedArtists.values())); // Pass the top style and the array of unique artists
     }
 
     // Display result
-    function displayResult(styleKey) {
-        const result = tattooQuiz.results[styleKey];
+    function displayResult(topStyleKey, artistsToRecommend) {
+        const result = tattooQuiz.results[topStyleKey];
         if (!result) {
-            console.error("Estilo de tatuagem não encontrado:", styleKey);
+            console.error("Estilo de tatuagem não encontrado:", topStyleKey);
             return;
         }
 
@@ -584,25 +588,19 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `).join('');
 
-        const artist = tattooQuiz.artists[result.artist];
-        if (artist) {
-            // Novo design do card do artista clicável
+        // Gerar múltiplos cartões de artista
+        if (artistsToRecommend.length > 0) {
             artistMatchElement.innerHTML = `
-                <a href="${artist.profileUrl}" class="artist-card-link" aria-label="Visitar perfil de ${artist.name}">
-                    <div class="artist-card quiz-artist-card">
-                        <div class="artist-header">
-                            <h3>Artista Recomendado:</h3>
-                            <h4>${artist.name}</h4>
-                        </div>
-                        <div class="artist-details">
-                            <p>Especialidades:</p>
-                            <ul>
-                                ${artist.specialties.map(spec => `<li>${spec}</li>`).join('')}
-                            </ul>
-                            <span class="view-profile-text">Ver Perfil <i class="fas fa-arrow-right"></i></span>
-                        </div>
-                    </div>
-                </a>
+                <h3 class="recommended-artists-title">Artistas Recomendados:</h3>
+                <div class="artist-cards-container">
+                    ${artistsToRecommend.map(artist => `
+                        <a href="${artist.profileUrl}" class="artist-card-link" aria-label="Visitar perfil de ${artist.name}">
+                            <div class="quiz-artist-card">
+                                <h4>${artist.name}</h4>
+                            </div>
+                        </a>
+                    `).join('')}
+                </div>
             `;
         } else {
             artistMatchElement.innerHTML = '<p>Nenhum artista recomendado encontrado para este estilo.</p>';
@@ -728,7 +726,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.querySelectorAll('.question-item').forEach(item => {
             item.addEventListener('click', function() {
-                const questionIndex = this.dataset.questionIndex;
+                const questionIndex = this.dataset.question-index;
                 showAnswer(category, questionIndex);
             });
         });
