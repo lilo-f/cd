@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -56,6 +57,10 @@
                     <span class="stat-value" id="livesDisplay">❤️❤️❤️</span>
                 </div>
             </div>
+           <button id="exitBtn" class="exit-btn">
+            <i class="fas fa-door-open"></i> SAIR
+        </button>
+     
         </header>
 
         <!-- Área principal do jogo -->
@@ -66,15 +71,15 @@
             <div id="gameOverlay">
                 <!-- Menu inicial -->
                 <div id="startMenu" class="menu-screen active">
-                    <div class="menu-content">
-                        <h2 class="game-title">INK ADVENTURE</h2>
-                        <p class="game-subtitle">Colete tintas, evite perigos e domine o estúdio!</p>
-                        <div class="menu-buttons">
-                            <button id="startBtn" class="menu-btn primary">INICIAR JOGO</button>
-                            <button id="instructionsBtn" class="menu-btn secondary">INSTRUÇÕES</button>
-                        </div>
-                    </div>
-                </div>
+    <div class="menu-content">
+        <h2 class="game-title">INK ADVENTURE</h2>
+        <p class="game-subtitle">Colete tintas, evite perigos e domine o estúdio!</p>
+        <div class="menu-buttons">
+            <button id="startBtn" class="menu-btn primary">INICIAR JOGO</button>
+            <button id="instructionsBtn" class="menu-btn secondary">INSTRUÇÕES</button>
+        </div>
+    </div>
+</div>
 
                 <!-- Menu de instruções -->
                 <div id="instructionsMenu" class="menu-screen">
@@ -140,18 +145,45 @@
             </div>
         </main>
 
-        <!-- Controles mobile -->
-        <div id="mobileControls" class="mobile-only">
-            <div class="control-group left">
-                <button class="control-btn" id="leftBtn">←</button>
-                <button class="control-btn" id="rightBtn">→</button>
-                <button class="control-btn" id="downBtn">↓</button>
-            </div>
-            <div class="control-group right">
-                <button class="control-btn jump" id="jumpBtn">PULAR</button>
-            </div>
+       <!-- Substitua a div de controles mobile por esta: -->
+<div id="mobileControls" class="mobile-only">
+    <div class="control-group left">
+        <button class="control-btn" id="leftBtn">←</button>
+        <button class="control-btn" id="rightBtn">→</button>
+    
+    </div>
+    <div class="control-group right">
+        <button class="control-btn jump" id="jumpBtn">PULAR</button>
+    </div>
+</div>
+    </div>
+
+    <!-- Modal de Confirmação Customizado -->
+<div id="customAlert" class="custom-alert">
+    <div class="alert-content">
+        <div class="alert-icon">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h3 class="alert-title">CONFIRMAR SAÍDA</h3>
+        <p class="alert-message">Tem certeza que deseja sair do jogo?</p>
+        <div class="alert-buttons">
+            <button id="alertConfirm" class="alert-btn confirm-btn">SIM</button>
+            <button id="alertCancel" class="alert-btn cancel-btn">CANCELAR</button>
         </div>
     </div>
+</div>
+<!-- Alerta de Cupom Copiado -->
+<div id="couponAlert" class="custom-alert coupon-alert">
+    <div class="alert-content">
+        <div class="alert-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h3 class="alert-title">CUPOM COPIADO!</h3>
+        <p class="alert-message">O código foi copiado para sua área de transferência</p>
+        <div class="coupon-preview" id="copiedCouponCode"></div>
+        <button id="couponAlertOk" class="alert-btn ok-btn">OK</button>
+    </div>
+</div>
  <script src="/js/home.js"></script>
     <script src="/js/game.js"></script>
 </body>
