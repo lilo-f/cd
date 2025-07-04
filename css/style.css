@@ -3096,3 +3096,228 @@ textarea:focus-visible {
     gap: 1.5rem;
     justify-items: center; /* Centraliza os itens na grade */
 }
+/* Container Principal do Quiz */
+#quiz-section {
+    padding: 30px 0; /* Mais padding vertical para 'respiro' */
+    background-color: var(--background);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinha o conteúdo ao topo da seção */
+    min-height: 100vh; /* Mantido para garantir que a seção cubra a viewport se o conteúdo for pequeno */
+    box-sizing: border-box;
+    padding-bottom: 80px; /* Padding extra na parte inferior para garantir espaço */
+}
+
+/* Ajustes para o container de resultados */
+.quiz-result {
+    text-align: center;
+    padding: 2rem; /* Aumentado o padding interno para mais 'respiro' */
+    background: rgba(26, 26, 26, 0.7);
+    border: 2px solid var(--soft-green);
+    border-radius: 20px; /* Levemente aumentado para um visual mais suave */
+    box-shadow: var(--soft-glow-green);
+    width: 90%;
+    max-width: 950px; /* **AJUSTADO: Otimizado para 950px para um equilíbrio visual** */
+    margin: 2rem auto; /* Mais margem vertical para separação */
+    box-sizing: border-box;
+}
+
+/* Título do estilo do resultado */
+#result-style {
+    font-size: 2.8rem; /* Aumentado para maior impacto */
+    margin-bottom: 1rem;
+    line-height: 1.1;
+    color: var(--primary-foreground); /* Garante que o título seja visível */
+}
+
+/* Descrição do resultado */
+#result-description {
+    font-size: 1.1rem; /* Um pouco maior para leitura confortável */
+    line-height: 1.6; /* Melhor espaçamento entre linhas */
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    color: var(--muted-foreground); /* Cor para melhor contraste */
+}
+
+/* Lista de características do estilo */
+#style-features {
+    padding: 0;
+    list-style: none;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+#style-features li {
+    font-size: 1rem; /* Ajustado para boa legibilidade */
+    margin-bottom: 8px; /* Mais espaçamento entre os itens da lista */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Mais espaço entre ícone e texto */
+    color: var(--foreground); /* Cor padrão do texto */
+}
+
+/* Contêiner para layout de detalhes (galeria e artistas lado a lado) */
+.quiz-details-content {
+    display: flex;
+    flex-direction: column; /* Padrão: empilha verticalmente */
+    gap: 3rem; /* Mais espaçamento entre as seções (galeria e artistas) */
+    margin-top: 2.5rem; /* Mais margem superior */
+    align-items: center;
+    text-align: center;
+}
+
+.result-gallery-section,
+.artist-recommendations-section {
+    width: 100%; /* Ocupam largura total por padrão */
+    /* Adicionar padding interno para estas seções se necessário para mais respiro */
+    padding: 0 10px;
+}
+
+/* Galeria de imagens dentro do resultado */
+.result-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Imagens maiores e flexíveis */
+    gap: 15px; /* Mais espaçamento entre as imagens */
+    margin-top: 1.2rem;
+    max-width: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.result-gallery-item img {
+    width: 100%;
+    height: 120px; /* **AUMENTADO: Altura das imagens da galeria para um visual impactante** */
+    object-fit: cover;
+    border-radius: 12px; /* Aumentado o border-radius */
+    transition: transform 0.2s ease-in-out; /* Adiciona transição para hover */
+}
+.result-gallery-item img:hover {
+    transform: scale(1.05); /* Efeito de zoom no hover */
+}
+
+/* Título de Artistas Recomendados */
+.recommended-artists-title {
+    text-align: center;
+    color: var(--primary-foreground);
+    margin-top: 2rem; /* Ajustado */
+    margin-bottom: 1rem; /* Ajustado */
+    font-size: 1.8rem; /* Aumentado para destaque */
+    font-weight: 700;
+}
+
+/* Container de cartões de artista */
+.artist-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px; /* Mais espaçamento entre os cartões */
+    margin-top: 1rem;
+}
+
+/* Cartão individual do artista */
+.quiz-artist-card {
+    padding: 12px 20px; /* Aumentado o padding para um visual mais robusto */
+    min-height: 60px; /* Aumentado */
+    background: rgba(26, 26, 26, 0.6); /* Levemente mais opaco para contraste */
+    border: 2px solid var(--soft-green); /* Borda mais pronunciada */
+    border-radius: 15px; /* Aumentado para um visual mais arredondado */
+    box-shadow: var(--soft-glow-green-strong); /* **NOVO: Adicionei uma variável para um brilho mais forte se você tiver** */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.2s ease-in-out; /* Transição para hover */
+}
+.quiz-artist-card:hover {
+    background: rgba(40, 40, 40, 0.7); /* Mudar cor no hover */
+    transform: translateY(-3px); /* Leve elevação no hover */
+    box-shadow: 0 8px 16px rgba(0, 255, 0, 0.3); /* Sombra mais destacada no hover */
+}
+
+.quiz-artist-card h4 {
+    font-size: 1.3rem; /* Aumentado para maior destaque */
+    line-height: 1.3;
+    margin: 0;
+    color: var(--primary-foreground); /* Garante boa visibilidade */
+}
+
+
+/* Media Queries para responsividade */
+@media (min-width: 900px) { /* Breakpoint para layout lado a lado */
+    .quiz-details-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 3rem; /* Espaçamento generoso entre as colunas */
+    }
+
+    .result-gallery-section {
+        flex: 3; /* Galeria ocupa mais espaço */
+        min-width: 450px; /* Garante tamanho mínimo da galeria */
+    }
+    .artist-recommendations-section {
+        flex: 2; /* Artistas ocupam menos espaço */
+        min-width: 350px; /* Garante tamanho mínimo para artistas */
+        text-align: center;
+    }
+
+    .result-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); /* Imagens ainda maiores */
+    }
+    .result-gallery-item img {
+        height: 130px;
+    }
+
+    .recommended-artists-title {
+        font-size: 1.9rem;
+    }
+    .quiz-artist-card {
+        padding: 15px 25px;
+        min-height: 65px;
+    }
+    .quiz-artist-card h4 {
+        font-size: 1.4rem;
+    }
+}
+
+
+@media (max-width: 768px) { /* Ajustes para telas menores (celulares) */
+    #quiz-section {
+        padding: 15px 0;
+        padding-bottom: 50px;
+    }
+    .quiz-result {
+        padding: 1.2rem;
+        margin: 1.2rem auto;
+        width: 95%;
+        max-width: none;
+        border-radius: 15px;
+    }
+    #result-style {
+        font-size: 2.2rem;
+    }
+    #result-description {
+        font-size: 0.95rem;
+    }
+    #style-features li {
+        font-size: 0.9rem;
+    }
+    .result-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 10px;
+    }
+    .result-gallery-item img {
+        height: 80px;
+    }
+    .recommended-artists-title {
+        font-size: 1.6rem;
+    }
+    .quiz-artist-card {
+        padding: 10px 15px;
+        min-height: 50px;
+    }
+    .quiz-artist-card h4 {
+        font-size: 1.2rem;
+    }
+}
