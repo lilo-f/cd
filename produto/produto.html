@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raven Studio - Produtos Profissionais para Tatuagem</title>
     <meta name="description" content="Produtos profissionais para tatuagem - Máquinas, agulhas, pomadas e acessórios da melhor qualidade no Raven Studio.">
-    <link rel="stylesheet" href="/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Bebas+Neue&family=Teko:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
@@ -152,25 +151,22 @@
         }
 
         .product-header {
-            display: flex;
-            align-items: center;
-            gap: 3rem;
             margin-bottom: 2rem;
         }
 
-        .product-title-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 2px solid var(--neon-blue);
-            box-shadow: var(--neon-glow-blue);
+        .product-title-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
         }
 
-        .product-title-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .product-title {
+            font-family: var(--font-secondary);
+            font-size: 3.5rem;
+            color: var(--neon-blue);
+            text-shadow: var(--text-glow-blue);
+            margin: 0;
         }
 
         .product-content {
@@ -234,20 +230,6 @@
         .product-info {
             width: 50%;
             color: var(--text-light);
-        }
-
-        .product-title-container {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .product-title {
-            font-family: var(--font-secondary);
-            font-size: 3.5rem;
-            color: var(--neon-blue);
-            text-shadow: var(--text-glow-blue);
-            margin: 0;
         }
 
         .product-meta {
@@ -571,8 +553,10 @@
         .variant-selector {
             display: flex;
             gap: 0.8rem;
+            flex-wrap: wrap;
         }
 
+        /* Estilo padronizado para todos os botões de variante */
         .variant-btn {
             padding: 0.6rem 1.2rem;
             background: var(--gradient-dark);
@@ -582,6 +566,8 @@
             font-family: var(--font-tech);
             cursor: pointer;
             transition: var(--transition-smooth);
+            min-width: 120px;
+            text-align: center;
         }
 
         .variant-btn:hover,
@@ -594,37 +580,6 @@
             background: rgba(0, 255, 100, 0.1);
             color: var(--neon-green);
             box-shadow: 0 0 10px rgba(0, 255, 128, 0.3);
-        }
-
-        /* Estilos específicos para cores */
-        .variant-btn[data-color="preto"] {
-            background: #000;
-            color: #fff;
-        }
-
-        .variant-btn[data-color="azul"] {
-            background: #0066ff;
-            color: #fff;
-        }
-
-        .variant-btn[data-color="vermelho"] {
-            background: #ff0000;
-            color: #fff;
-        }
-
-        .variant-btn.active[data-color="preto"] {
-            border-color: #fff;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-        }
-
-        .variant-btn.active[data-color="azul"] {
-            border-color: #00e5ff;
-            box-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
-        }
-
-        .variant-btn.active[data-color="vermelho"] {
-            border-color: #ff4d4d;
-            box-shadow: 0 0 10px rgba(255, 77, 77, 0.7);
         }
 
         .product-stock {
@@ -1053,8 +1008,8 @@
         }
         .review-author h4 {
             font-family: var(--font-secondary);
-            color: var(--neon-green);
             margin-bottom: 0.3rem;
+            color: var(--neon-green);
             font-size: 1.1rem;
         }
         .review-author .stars {
@@ -1384,6 +1339,139 @@
             transform: translateX(0);
         }
 
+        /* Modal de Avaliação */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--gradient-dark);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid var(--neon-green);
+            box-shadow: var(--neon-glow-green);
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .close-modal:hover {
+            color: var(--neon-blue);
+        }
+
+        .modal-title {
+            font-family: var(--font-secondary);
+            color: var(--neon-green);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .rating-stars {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .rating-stars .star {
+            font-size: 2rem;
+            color: var(--medium-gray);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .rating-stars .star.selected {
+            color: gold;
+        }
+
+        .rating-stars .star:hover {
+            transform: scale(1.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: var(--font-tech);
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--dark-gray);
+            border: 1px solid var(--medium-gray);
+            border-radius: 5px;
+            color: var(--text-light);
+            font-family: var(--font-tech);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-review {
+            background: var(--neon-green);
+            color: var(--primary-black);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-family: var(--font-secondary);
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: block;
+            width: 100%;
+        }
+
+        .submit-review:hover {
+            background: var(--neon-blue);
+            box-shadow: var(--neon-glow-blue);
+            transform: translateY(-3px);
+        }
+
+        .login-message {
+            text-align: center;
+            margin-top: 1rem;
+            font-family: var(--font-tech);
+        }
+
+        .login-message a {
+            color: var(--neon-blue);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .login-message a:hover {
+            color: var(--neon-green);
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .product-hero-content {
@@ -1505,9 +1593,6 @@
             <div class="container">
                 <div class="product-hero-content">
                     <div class="product-header">
-                        <div class="product-title-image">
-                            <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Máquina de Tatuagem Rotativa Raven PRO X1">
-                        </div>
                         <div class="product-title-container">
                             <h1 class="product-title">Máquina de Tatuagem Rotativa Raven PRO X1</h1>
                             <span class="product-badge">Novidade</span>
@@ -1735,7 +1820,7 @@
                                     </span>
                                     <span class="rating-count">Baseado em 120 Avaliações</span>
                                 </div>
-                                <button class="write-review-btn">Escrever uma Avaliação</button>
+                                <button id="write-review-btn" class="write-review-btn">Escrever uma Avaliação</button>
                             </div>
                             <div class="rating-bars">
                                 <div class="rating-bar">
@@ -1903,6 +1988,45 @@
         </section>
     </main>
 
+    <!-- Modal de Avaliação -->
+    <div id="review-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Escreva sua Avaliação</h2>
+            
+            <div id="review-form">
+                <div class="form-group">
+                    <label for="review-title">Título da Avaliação:</label>
+                    <input type="text" id="review-title" placeholder="Ex: Excelente produto!">
+                </div>
+                
+                <div class="form-group">
+                    <label>Sua Avaliação:</label>
+                    <div class="rating-stars">
+                        <span class="star" data-rating="1"><i class="far fa-star"></i></span>
+                        <span class="star" data-rating="2"><i class="far fa-star"></i></span>
+                        <span class="star" data-rating="3"><i class="far fa-star"></i></span>
+                        <span class="star" data-rating="4"><i class="far fa-star"></i></span>
+                        <span class="star" data-rating="5"><i class="far fa-star"></i></span>
+                    </div>
+                    <input type="hidden" id="review-rating" value="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="review-text">Comentário:</label>
+                    <textarea id="review-text" placeholder="Conte sua experiência com o produto..."></textarea>
+                </div>
+                
+                <button id="submit-review" class="submit-review">Enviar Avaliação</button>
+            </div>
+            
+            <div id="login-message" class="login-message" style="display: none;">
+                <p>Você precisa estar logado para escrever uma avaliação.</p>
+                <a href="login.html">Fazer Login</a>
+            </div>
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="container footer-content">
             <div class="footer-left">
@@ -1937,7 +2061,17 @@
     <div id="notification" class="notification">Produto adicionado ao carrinho!</div>
 
     <script>
+        // Estado do usuário (simulado)
+        const userState = {
+            isLoggedIn: true, // Alterado para true para testar
+            name: "Usuário Teste",
+            avatar: "https://randomuser.me/api/portraits/men/1.jpg"
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
+            // Atualizar ícone do usuário se estiver logado
+            updateUserIcon();
+
             // Smooth Scroll for Navigation (if applicable)
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -2011,37 +2145,14 @@
                 });
             }
 
-            // Shipping Calculator (Simulated)
-            const cepInput = document.getElementById('cep-input');
-            const calculateShippingBtn = document.getElementById('calculate-shipping-btn');
-            const shippingResults = document.getElementById('shipping-results');
-
-            calculateShippingBtn.addEventListener('click', () => {
-                const cep = cepInput.value.replace(/\D/g, ''); // Remove non-digits
-                if (cep.length === 8) {
-                    // Simulate API call
-                    setTimeout(() => {
-                        const randomPrice = (Math.random() * 30 + 10).toFixed(2);
-                        const randomDays = Math.floor(Math.random() * 5) + 2;
-                        shippingResults.innerHTML = `
-                            <p><strong>Frete para ${cep}:</strong></p>
-                            <p>Prazo de entrega: ${randomDays} dias úteis</p>
-                            <p>Custo: R$ ${randomPrice}</p>
-                        `;
-                    }, 500);
-                } else {
-                    shippingResults.innerHTML = '<p style="color: red;">Por favor, insira um CEP válido com 8 dígitos.</p>';
-                }
-            });
-
             // Variant Selection
             const variantButtons = document.querySelectorAll('.variant-btn');
             
             variantButtons.forEach(button => {
-                button.addEventListener('click', (e) => {
-                    // Remove active class from all buttons in the same group
-                    const parent = e.target.closest('.variant-option');
-                    parent.querySelectorAll('.variant-btn').forEach(btn => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons in the same variant group
+                    const parentSelector = button.closest('.variant-selector');
+                    parentSelector.querySelectorAll('.variant-btn').forEach(btn => {
                         btn.classList.remove('active');
                     });
                     
@@ -2050,112 +2161,178 @@
                 });
             });
 
-            // Funções para manipulação do carrinho
-            function getCart() {
-                try {
-                    const cart = JSON.parse(localStorage.getItem('cart'));
-                    return Array.isArray(cart) ? cart : [];
-                } catch (e) {
-                    return [];
-                }
-            }
-
-            function saveCart(cart) {
-                if (!Array.isArray(cart)) {
-                    cart = [];
-                }
-                localStorage.setItem('cart', JSON.stringify(cart));
-            }
-
-            function updateCartCounter() {
-                const cart = getCart();
-                const totalItems = cart.reduce((total, item) => total + (item.quantity || 0), 0);
-                
-                const cartIcon = document.querySelector('.cart-icon');
-                if (cartIcon) {
-                    // Remove o contador existente, se houver
-                    const existingCounter = cartIcon.querySelector('.cart-counter');
-                    if (existingCounter) {
-                        existingCounter.remove();
-                    }
-                    
-                    // Adiciona o novo contador se houver itens
-                    if (totalItems > 0) {
-                        const counter = document.createElement('span');
-                        counter.className = 'cart-counter';
-                        counter.textContent = totalItems;
-                        counter.style.position = 'absolute';
-                        counter.style.top = '-10px';
-                        counter.style.right = '-10px';
-                        counter.style.backgroundColor = 'var(--neon-green)';
-                        counter.style.color = 'var(--primary-black)';
-                        counter.style.borderRadius = '50%';
-                        counter.style.width = '20px';
-                        counter.style.height = '20px';
-                        counter.style.display = 'flex';
-                        counter.style.alignItems = 'center';
-                        counter.style.justifyContent = 'center';
-                        counter.style.fontSize = '0.8rem';
-                        counter.style.fontWeight = 'bold';
-                        
-                        cartIcon.style.position = 'relative';
-                        cartIcon.appendChild(counter);
-                    }
-                }
-            }
-
-            // Adicionar ao Carrinho - Funcionalidade Completa
+            // Add to Cart Functionality
             const addToCartBtn = document.getElementById('add-to-cart-btn');
             const notification = document.getElementById('notification');
 
-            addToCartBtn.addEventListener('click', () => {
-                // Obter informações do produto
-                const product = {
-                    id: document.querySelector('.product-sku').textContent.split(': ')[1],
-                    name: document.querySelector('.product-title').textContent,
-                    price: parseFloat(document.querySelector('.price-amount').textContent.replace('R$ ', '').replace('.', '').replace(',', '.')),
-                    quantity: parseInt(document.querySelector('.quantity-selector input').value),
-                    image: document.querySelector('.main-image img').src,
-                    color: document.querySelector('.variant-btn[data-color].active').textContent,
-                    size: document.querySelector('.variant-btn[data-size].active').textContent
-                };
+            if (addToCartBtn && notification) {
+                addToCartBtn.addEventListener('click', () => {
+                    // Show notification
+                    notification.classList.add('show');
+                    
+                    // Hide notification after 3 seconds
+                    setTimeout(() => {
+                        notification.classList.remove('show');
+                    }, 3000);
+                });
+            }
 
-                const cart = getCart();
-                const existingProductIndex = cart.findIndex(item => 
-                    item.id === product.id && 
-                    item.color === product.color && 
-                    item.size === product.size
-                );
-                
-                if (existingProductIndex >= 0) {
-                    // Se já existe, atualiza a quantidade
-                    cart[existingProductIndex].quantity += product.quantity;
-                } else {
-                    // Se não existe, adiciona ao carrinho
-                    cart.push(product);
+            // Shipping Calculator
+            const calculateShippingBtn = document.getElementById('calculate-shipping-btn');
+            const shippingResults = document.getElementById('shipping-results');
+
+            if (calculateShippingBtn && shippingResults) {
+                calculateShippingBtn.addEventListener('click', () => {
+                    const cepInput = document.getElementById('cep-input');
+                    if (cepInput && cepInput.value.length === 9) {
+                        // Simulate shipping calculation
+                        shippingResults.innerHTML = `
+                            <p><strong>Opções de envio para CEP ${cepInput.value}:</strong></p>
+                            <p>Expresso (1-3 dias úteis): R$ 25,90</p>
+                            <p>Padrão (5-10 dias úteis): R$ 15,90</p>
+                            <p>Frete Grátis (acima de R$500): 7-12 dias úteis</p>
+                        `;
+                    } else {
+                        shippingResults.innerHTML = `<p>Por favor, insira um CEP válido no formato 00000-000</p>`;
+                    }
+                });
+            }
+
+            // Review System - Código corrigido
+            const writeReviewBtn = document.getElementById('write-review-btn');
+            const reviewModal = document.getElementById('review-modal');
+            const closeModal = document.querySelector('.close-modal');
+            const stars = document.querySelectorAll('.rating-stars .star'); // Seleciona apenas as estrelas do modal
+            const reviewRating = document.getElementById('review-rating');
+            const reviewForm = document.getElementById('review-form');
+            const loginMessage = document.getElementById('login-message');
+            const submitReviewBtn = document.getElementById('submit-review');
+
+            // Função para atualizar as estrelas
+            function updateStars(rating) {
+                stars.forEach(star => {
+                    const starRating = parseInt(star.getAttribute('data-rating'));
+                    if (starRating <= rating) {
+                        star.innerHTML = '<i class="fas fa-star"></i>';
+                        star.classList.add('selected');
+                    } else {
+                        star.innerHTML = '<i class="far fa-star"></i>';
+                        star.classList.remove('selected');
+                    }
+                });
+            }
+
+            // Abrir modal de avaliação
+            if (writeReviewBtn) {
+                writeReviewBtn.addEventListener('click', () => {
+                    if (userState.isLoggedIn) {
+                        reviewForm.style.display = 'block';
+                        loginMessage.style.display = 'none';
+                        reviewModal.style.display = 'flex';
+                        // Resetar estrelas ao abrir o modal
+                        updateStars(0);
+                        reviewRating.value = '0';
+                    } else {
+                        reviewForm.style.display = 'none';
+                        loginMessage.style.display = 'block';
+                        reviewModal.style.display = 'flex';
+                    }
+                });
+            }
+
+            // Fechar modal
+            if (closeModal) {
+                closeModal.addEventListener('click', () => {
+                    reviewModal.style.display = 'none';
+                });
+            }
+
+            // Fechar modal ao clicar fora
+            window.addEventListener('click', (e) => {
+                if (e.target === reviewModal) {
+                    reviewModal.style.display = 'none';
                 }
-
-                saveCart(cart);
-
-                notification.classList.add('show');
-                
-                // Esconder notificação após 3 segundos
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                }, 3000);
-
-                // Atualizar contador do carrinho
-                updateCartCounter();
             });
 
-            // Inicializar contador do carrinho
-            updateCartCounter();
+            // Sistema de classificação por estrelas - Código corrigido
+            stars.forEach(star => {
+                star.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Impede a propagação do evento
+                    const rating = parseInt(star.getAttribute('data-rating'));
+                    reviewRating.value = rating;
+                    updateStars(rating);
+                });
 
-            // Reveal sections on scroll
-            const revealSections = document.querySelectorAll('.reveal-section');
-            
-            const revealOnScroll = () => {
-                revealSections.forEach(section => {
+                // Efeito hover nas estrelas
+                star.addEventListener('mouseover', () => {
+                    const rating = parseInt(star.getAttribute('data-rating'));
+                    stars.forEach(s => {
+                        const sRating = parseInt(s.getAttribute('data-rating'));
+                        if (sRating <= rating) {
+                            s.innerHTML = '<i class="fas fa-star"></i>';
+                        } else {
+                            s.innerHTML = '<i class="far fa-star"></i>';
+                        }
+                    });
+                });
+
+                // Resetar visualização quando o mouse sai
+                star.addEventListener('mouseout', () => {
+                    const currentRating = parseInt(reviewRating.value);
+                    updateStars(currentRating);
+                });
+            });
+
+            // Enviar avaliação
+            if (submitReviewBtn) {
+                submitReviewBtn.addEventListener('click', () => {
+                    const title = document.getElementById('review-title').value;
+                    const rating = reviewRating.value;
+                    const text = document.getElementById('review-text').value;
+                    
+                    if (rating === '0') {
+                        alert('Por favor, selecione uma classificação com estrelas');
+                        return;
+                    }
+                    
+                    if (title.trim() === '') {
+                        alert('Por favor, insira um título para sua avaliação');
+                        return;
+                    }
+                    
+                    if (text.trim() === '') {
+                        alert('Por favor, escreva seu comentário');
+                        return;
+                    }
+                    
+                    // Aqui você normalmente enviaria os dados para o servidor
+                    // Vamos simular o envio e adicionar a nova avaliação
+                    addNewReview(title, rating, text);
+                    
+                    // Fechar o modal
+                    reviewModal.style.display = 'none';
+                    
+                    // Mostrar notificação
+                    notification.textContent = 'Avaliação enviada com sucesso!';
+                    notification.classList.add('show');
+                    
+                    setTimeout(() => {
+                        notification.classList.remove('show');
+                    }, 3000);
+                    
+                    // Limpar o formulário
+                    document.getElementById('review-title').value = '';
+                    document.getElementById('review-text').value = '';
+                    reviewRating.value = '0';
+                    updateStars(0);
+                });
+            }
+
+            // Reveal Sections on Scroll
+            const revealSections = () => {
+                const sections = document.querySelectorAll('.reveal-section');
+                
+                sections.forEach(section => {
                     const sectionTop = section.getBoundingClientRect().top;
                     const windowHeight = window.innerHeight;
                     
@@ -2165,9 +2342,82 @@
                 });
             };
 
-            window.addEventListener('scroll', revealOnScroll);
-            window.addEventListener('load', revealOnScroll);
+            // Initial check and event listener for scroll
+            revealSections();
+            window.addEventListener('scroll', revealSections);
         });
+
+        // CEP Input Mask
+        document.getElementById('cep-input')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if (value.length > 5) {
+                value = value.substring(0, 5) + '-' + value.substring(5, 8);
+            }
+            
+            e.target.value = value;
+        });
+
+        // Função para atualizar ícone do usuário
+        function updateUserIcon() {
+            const userIconLink = document.getElementById('user-avatar-link');
+            if (userIconLink) {
+                if (userState.isLoggedIn) {
+                    userIconLink.innerHTML = `<img src="${userState.avatar}" alt="${userState.name}" style="width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--neon-green);">`;
+                } else {
+                    userIconLink.innerHTML = '<i class="fas fa-user-circle"></i>';
+                }
+            }
+        }
+
+        // Função para adicionar nova avaliação (simulação)
+        function addNewReview(title, rating, text) {
+            const reviewsList = document.querySelector('.reviews-list');
+            const now = new Date();
+            const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+            const dateStr = `${now.getDate()} de ${months[now.getMonth()]}, ${now.getFullYear()}`;
+            
+            const starsHtml = Array.from({length: 5}, (_, i) => 
+                i < rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>'
+            ).join('');
+            
+            const newReview = document.createElement('div');
+            newReview.className = 'review-item';
+            newReview.innerHTML = `
+                <div class="review-header">
+                    <div class="review-author">
+                        <img src="${userState.avatar}" alt="Avatar do Usuário">
+                        <h4>${userState.name}</h4>
+                        <span class="stars">${starsHtml}</span>
+                    </div>
+                    <span class="review-date">${dateStr}</span>
+                </div>
+                <h3 class="review-title">${title}</h3>
+                <p class="review-text">${text}</p>
+                <div class="review-actions">
+                    <button><i class="fas fa-thumbs-up"></i> Útil (0)</button>
+                    <button><i class="fas fa-share-alt"></i> Compartilhar</button>
+                </div>
+            `;
+            
+            // Adicionar no início da lista
+            reviewsList.insertBefore(newReview, reviewsList.firstChild);
+            
+            // Atualizar contagem de avaliações
+            const ratingCount = document.querySelector('.rating-count');
+            if (ratingCount) {
+                const currentCount = parseInt(ratingCount.textContent.match(/\d+/)[0]);
+                ratingCount.textContent = `Baseado em ${currentCount + 1} Avaliações`;
+            }
+            
+            // Atualizar botão de avaliações na tab
+            const reviewsTabBtn = document.querySelector('.tab-btn[data-tab="reviews"]');
+            if (reviewsTabBtn) {
+                const currentText = reviewsTabBtn.textContent;
+                const newCount = parseInt(currentText.match(/\d+/)[0]) + 1;
+                reviewsTabBtn.textContent = currentText.replace(/\d+/, newCount);
+            }
+        }
     </script>
 </body>
 </html>
