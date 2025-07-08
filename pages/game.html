@@ -128,20 +128,21 @@
                 </div>
 
                 <!-- Menu de level complete -->
-                <div id="levelCompleteMenu" class="menu-screen">
-                    <div class="menu-content">
-                        <h2 class="level-complete-title">NÍVEL DOMINADO!</h2>
-                        <div class="coupon-reward">
-                            <div class="coupon-icon">🎫</div>
-                            <p class="coupon-text">Cupom de desconto desbloqueado!</p>
-                            <div class="coupon-code" id="couponCode">RAVEN2024</div>
-                        </div>
-                        <div class="menu-buttons">
-                            <button id="nextLevelBtn" class="menu-btn primary">PRÓXIMO NÍVEL</button>
-                            <button id="copyCodeBtn" class="menu-btn secondary">COPIAR CÓDIGO</button>
-                        </div>
-                    </div>
-                </div>
+               <div id="levelCompleteMenu" class="menu-screen">
+    <div class="menu-content">
+        <h2 class="level-complete-title">NÍVEL COMPLETO!</h2>
+        <div class="points-reward">
+            <div class="points-icon">💰</div>
+            <p class="points-text">Você acumulou:</p>
+            <div class="points-display" id="pointsEarned">0</div>
+            <p class="points-info">Use seus pontos para obter descontos em nossa loja!</p>
+        </div>
+        <div class="menu-buttons">
+            <button id="nextLevelBtn" class="menu-btn primary">PRÓXIMO NÍVEL</button>
+              <button id="menuBtn" class="menu-btn secondary">MENU PRINCIPAL</button>
+        </div>
+    </div>
+</div>
             </div>
         </main>
 
@@ -172,18 +173,7 @@
         </div>
     </div>
 </div>
-<!-- Alerta de Cupom Copiado -->
-<div id="couponAlert" class="custom-alert coupon-alert">
-    <div class="alert-content">
-        <div class="alert-icon">
-            <i class="fas fa-check-circle"></i>
-        </div>
-        <h3 class="alert-title">CUPOM COPIADO!</h3>
-        <p class="alert-message">O código foi copiado para sua área de transferência</p>
-        <div class="coupon-preview" id="copiedCouponCode"></div>
-        <button id="couponAlertOk" class="alert-btn ok-btn">OK</button>
-    </div>
-</div>
+
 <script src="/js/home.js" defer></script>
 <script src="/js/game.js" defer></script>
 </body>
