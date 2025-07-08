@@ -131,6 +131,29 @@
             color: var(--neon-blue);
         }
 
+        /* Cart count badge */
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--neon-green);
+            color: var(--primary-black);
+            font-family: var(--font-tech);
+            font-size: 0.7rem;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 2px 6px;
+            min-width: 20px;
+            text-align: center;
+            line-height: 1;
+            box-shadow: 0 0 5px rgba(0, 255, 128, 0.7);
+            display: none; /* Hidden by default */
+        }
+
         .menu-toggle {
             display: none;
             cursor: pointer;
@@ -340,6 +363,19 @@
             color: var(--primary-black);
             transform: translateY(-3px);
         }
+
+        /* Wishlist button active state */
+        .secondary-button.in-wishlist {
+            background: var(--neon-red); /* Define a new neon-red or use another striking color */
+            color: var(--primary-black);
+            border-color: var(--neon-red);
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.7), 0 0 20px rgba(255, 0, 0, 0.5); /* Red glow */
+        }
+        /* Define --neon-red in :root if not already defined */
+        :root {
+            --neon-red: #ff0055; /* Example red for wishlist active state */
+        }
+
 
         .product-highlights {
             margin-bottom: 2rem;
@@ -1544,7 +1580,7 @@
             </ul>
             <div class="nav-icons">
                 <a href="#" class="search-icon"><i class="fas fa-search"></i></a>
-                <a href="cart.html" class="cart-icon"><i class="fas fa-shopping-cart"></i></a>
+                <a href="cart.html" class="cart-icon"><i class="fas fa-shopping-cart"></i><span class="cart-count-badge">0</span></a>
                 <a href="profile.html" class="user-icon" id="user-avatar-link"><i class="fas fa-user-circle"></i></a>
             </div>
             <div class="menu-toggle">
@@ -1559,7 +1595,7 @@
                 <div class="product-hero-content">
                     <div class="product-header">
                         <div class="product-title-container">
-                            <h1 class="product-title">Máquina de Tatuagem Rotativa Raven PRO X1</h1>
+                            <h1 class="product-title" data-product-name="Máquina de Tatuagem Rotativa Raven PRO X1" data-product-price="1250.00" data-product-id="raven-pro-x1">Máquina de Tatuagem Rotativa Raven PRO X1</h1>
                             <span class="product-badge">Novidade</span>
                         </div>
                     </div>
@@ -1604,18 +1640,18 @@
                             <div class="product-variants">
                                 <div class="variant-option">
                                     <h3>Cor:</h3>
-                                    <div class="variant-selector">
-                                        <button class="variant-btn active">Preto Espacial</button>
-                                        <button class="variant-btn">Cromado Lunar</button>
-                                        <button class="variant-btn">Dourado Nebula</button>
+                                    <div class="variant-selector" data-variant-type="color">
+                                        <button class="variant-btn active" data-variant-value="Preto Espacial">Preto Espacial</button>
+                                        <button class="variant-btn" data-variant-value="Cromado Lunar">Cromado Lunar</button>
+                                        <button class="variant-btn" data-variant-value="Dourado Nebula">Dourado Nebula</button>
                                     </div>
                                 </div>
                                 <div class="variant-option">
                                     <h3>Tensão (V):</h3>
-                                    <div class="variant-selector">
-                                        <button class="variant-btn">8V</button>
-                                        <button class="variant-btn active">10V</button>
-                                        <button class="variant-btn">12V</button>
+                                    <div class="variant-selector" data-variant-type="voltage">
+                                        <button class="variant-btn" data-variant-value="8V">8V</button>
+                                        <button class="variant-btn active" data-variant-value="10V">10V</button>
+                                        <button class="variant-btn" data-variant-value="12V">12V</button>
                                     </div>
                                 </div>
                             </div>
@@ -1628,8 +1664,8 @@
                                 <button class="quantity-btn" id="increase-quantity">+</button>
                             </div>
                             <div class="product-actions">
-                                <button class="primary-button"><i class="fas fa-shopping-bag"></i> Adicionar ao Carrinho</button>
-                                <button class="secondary-button"><i class="fas fa-heart"></i> Adicionar à Lista de Desejos</button>
+                                <button class="primary-button" id="add-to-cart-btn"><i class="fas fa-shopping-bag"></i> Adicionar ao Carrinho</button>
+                                <button class="secondary-button" id="add-to-wishlist-btn"><i class="far fa-heart"></i> Adicionar à Lista de Desejos</button>
                             </div>
                             <div class="product-payment-methods">
                                 <h3>Formas de Pagamento Seguras:</h3>
@@ -2007,6 +2043,64 @@
     </div>
 
     <script>
+        // Global variables for product data
+        const PRODUCT_ID = document.querySelector('.product-title').dataset.productId;
+        const PRODUCT_NAME = document.querySelector('.product-title').dataset.productName;
+        const PRODUCT_PRICE = parseFloat(document.querySelector('.product-title').dataset.productPrice);
+
+        // Helper functions for localStorage
+        function getLocalStorageItem(key, defaultValue = []) {
+            try {
+                const item = localStorage.getItem(key);
+                return item ? JSON.parse(item) : defaultValue;
+            } catch (e) {
+                console.error("Error parsing localStorage item:", key, e);
+                return defaultValue;
+            }
+        }
+
+        function setLocalStorageItem(key, value) {
+            localStorage.setItem(key, JSON.stringify(value));
+        }
+
+        // Initialize cart count badge on page load
+        const cartCountBadge = document.querySelector('.cart-count-badge');
+
+        function updateCartCountBadge() {
+            const cart = getLocalStorageItem('cart');
+            let totalItems = 0;
+            cart.forEach(item => {
+                totalItems += item.quantity;
+            });
+            cartCountBadge.textContent = totalItems;
+            if (totalItems > 0) {
+                cartCountBadge.style.display = 'block';
+            } else {
+                cartCountBadge.style.display = 'none';
+            }
+        }
+
+        // Initialize wishlist button state on page load
+        const addToWishlistBtn = document.getElementById('add-to-wishlist-btn');
+        const wishlistIcon = addToWishlistBtn.querySelector('i');
+
+        function updateWishlistButton() {
+            const wishlist = getLocalStorageItem('wishlist');
+            if (wishlist.includes(PRODUCT_ID)) {
+                wishlistIcon.classList.remove('far');
+                wishlistIcon.classList.add('fas');
+                addToWishlistBtn.classList.add('in-wishlist'); // Add class for styling
+            } else {
+                wishlistIcon.classList.remove('fas');
+                wishlistIcon.classList.add('far');
+                addToWishlistBtn.classList.remove('in-wishlist'); // Remove class for styling
+            }
+        }
+
+        // Call initial updates
+        updateCartCountBadge();
+        updateWishlistButton();
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -2106,18 +2200,78 @@
             sectionObserver.observe(section);
         });
 
-        // Notification for "Add to Cart"
-        const primaryButton = document.querySelector('.primary-button');
+        // Notification function
         const notification = document.getElementById('notification');
+        function showNotification(message) {
+            notification.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000); // Hide after 3 seconds
+        }
 
-        if (primaryButton) {
-            primaryButton.addEventListener('click', (e) => {
-                // Prevent default button behavior if it's a form submission, etc.
-                e.preventDefault(); 
-                notification.classList.add('show');
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                }, 3000); // Hide after 3 seconds
+        // Add to Cart Button (Primary Button)
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
+
+        if (addToCartBtn) {
+            addToCartBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                const quantity = parseInt(quantityInput.value);
+                const selectedColor = document.querySelector('.variant-selector[data-variant-type="color"] .variant-btn.active')?.dataset.variantValue || 'N/A';
+                const selectedVoltage = document.querySelector('.variant-selector[data-variant-type="voltage"] .variant-btn.active')?.dataset.variantValue || 'N/A';
+
+                const cartItem = {
+                    id: PRODUCT_ID,
+                    name: PRODUCT_NAME,
+                    price: PRODUCT_PRICE,
+                    color: selectedColor,
+                    voltage: selectedVoltage,
+                    quantity: quantity
+                };
+
+                let cart = getLocalStorageItem('cart');
+
+                // Check if item with same variants already exists in cart
+                const existingItemIndex = cart.findIndex(item => 
+                    item.id === cartItem.id && 
+                    item.color === cartItem.color && 
+                    item.voltage === cartItem.voltage
+                );
+
+                if (existingItemIndex > -1) {
+                    cart[existingItemIndex].quantity += quantity; // Update quantity
+                    showNotification('Quantidade do item atualizada no carrinho!');
+                } else {
+                    cart.push(cartItem); // Add new item
+                    showNotification('Produto adicionado ao carrinho!');
+                }
+
+                setLocalStorageItem('cart', cart);
+                updateCartCountBadge();
+            });
+        }
+
+        // Add to Wishlist Button (Secondary Button)
+        if (addToWishlistBtn) {
+            addToWishlistBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                let wishlist = getLocalStorageItem('wishlist');
+                const productId = PRODUCT_ID;
+
+                if (wishlist.includes(productId)) {
+                    // Remove from wishlist
+                    wishlist = wishlist.filter(id => id !== productId);
+                    showNotification('Produto removido da sua lista de desejos!');
+                } else {
+                    // Add to wishlist
+                    wishlist.push(productId);
+                    showNotification('Produto adicionado à sua lista de desejos!');
+                }
+
+                setLocalStorageItem('wishlist', wishlist);
+                updateWishlistButton(); // Update button icon and background
             });
         }
 
@@ -2277,6 +2431,20 @@
             document.querySelectorAll('.rating-stars .star').forEach(star => {
                 star.classList.remove('selected', 'fas');
                 star.classList.add('far');
+            });
+        });
+
+        // Variant Selection (Color and Voltage)
+        document.querySelectorAll('.variant-selector').forEach(selector => {
+            selector.addEventListener('click', (event) => {
+                if (event.target.classList.contains('variant-btn')) {
+                    // Remove 'active' from all buttons within the same selector
+                    selector.querySelectorAll('.variant-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    // Add 'active' to the clicked button
+                    event.target.classList.add('active');
+                }
             });
         });
     </script>
