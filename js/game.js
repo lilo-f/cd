@@ -145,25 +145,29 @@ class RavenGame {
         }, { once: true });
     }
 
-    setupUI() {
-        // Mapeamento de botões com verificações
-        const buttons = {
-            'startBtn': () => this.startGame(),
-            'instructionsBtn': () => this.showInstructions(),
-            'backBtn': () => this.showMenu(),
-            'restartBtn': () => this.startGame(),
-            'menuBtn': () => this.showMenu(),
-            'nextLevelBtn': () => this.nextLevel(),
-            'copyCodeBtn': () => this.copyCouponCode(),
-            'exitBtn': () => this.showCustomAlert(),
-            'testSoundBtn': () => this.testAudio()
-        };
-        
-        for (const [id, handler] of Object.entries(buttons)) {
-            const btn = document.getElementById(id);
-            if (btn) btn.addEventListener('click', handler);
+ setupUI() {
+    // Mapeamento de botões com verificações robustas
+    const buttons = {
+        'startBtn': () => this.startGame(),
+        'instructionsBtn': () => this.showInstructions(),
+        'backBtn': () => this.showMenu(),
+        'restartBtn': () => this.startGame(),
+        'menuBtn': () => this.showMenu(),
+        'nextLevelBtn': () => this.nextLevel(),
+        'exitBtn': () => this.showCustomAlert(),
+        'testSoundBtn': () => this.testAudio()
+    };
+    
+    for (const [id, handler] of Object.entries(buttons)) {
+        const btn = document.getElementById(id);
+        if (btn) {
+            btn.addEventListener('click', handler);
+            console.log(`Botão ${id} configurado`); // Log para debug
+        } else {
+            console.warn(`Botão ${id} não encontrado`); // Aviso se não encontrar
         }
     }
+}
 
     /* ========== GERENCIAMENTO DO JOGO ========== */
     init() {
@@ -185,35 +189,52 @@ class RavenGame {
     this.stopBackgroundMusic();
 }
 
-    startGame() {
-        this.stopBackgroundMusic();
-        clearTimeout(this.musicTimer);
-        
-        if (this.audioContext.state === 'suspended') {
-            this.audioContext.resume().then(() => {
-                this.initGameAfterAudio();
-            }).catch(console.error);
-        } else {
+startGame() {
+    console.log("Iniciando jogo..."); // Debug
+    this.stopBackgroundMusic();
+    clearTimeout(this.musicTimer);
+    
+    // Resetar completamente o estado do jogo
+    this.resetGameState();
+    this.resetPlayer();
+    
+    // Verificar estado do áudio
+    if (this.audioContext.state === 'suspended') {
+        console.log("Audio suspenso - solicitando ativação...");
+        this.audioContext.resume().then(() => {
+            console.log("Audio ativado com sucesso");
             this.initGameAfterAudio();
-        }
+        }).catch(error => {
+            console.error("Erro ao ativar áudio:", error);
+            this.initGameAfterAudio(); // Continuar mesmo com erro de áudio
+        });
+    } else {
+        console.log("Audio já ativo - iniciando jogo");
+        this.initGameAfterAudio();
     }
-
+}
     initGameAfterAudio() {
-        this.gameState = 'playing';
-        this.hideAllMenus();
-        this.resetPlayer();
-        this.initLevel();
-        this.playBackgroundMusic();
-    }
+    this.gameState = 'playing';
+    this.hideAllMenus();
+    // Removemos o resetPlayer() daqui pois já foi chamado no startGame()
+    this.initLevel();
+    this.playBackgroundMusic();
+}
 
     /* ========== GERENCIAMENTO DE MENUS ========== */
-    showMenu() {
-        this.gameState = 'menu';
-        this.stopBackgroundMusic();
-        this.hideAllMenus();
-        const startMenu = document.getElementById('startMenu');
-        if (startMenu) startMenu.classList.add('active');
-    }
+ showMenu() {
+    this.gameState = 'menu';
+    this.stopBackgroundMusic();
+    this.hideAllMenus();
+    const startMenu = document.getElementById('startMenu');
+    if (startMenu) startMenu.classList.add('active');
+}
+if (menuBtn) {
+    menuBtn.addEventListener('click', () => {
+        console.log("Menu button clicked"); // Debug
+        this.showMenu();
+    });
+}
 
     showInstructions() {
         this.hideAllMenus();
@@ -221,36 +242,36 @@ class RavenGame {
         if (instructionsMenu) instructionsMenu.classList.add('active');
     }
 
-    hideAllMenus() {
-        document.querySelectorAll('.menu-screen').forEach(menu => {
-            menu.classList.remove('active');
-        });
-    }
-
+hideAllMenus() {
+    document.querySelectorAll('.menu-screen').forEach(menu => {
+        menu.classList.remove('active');
+    });
+}
     /* ========== LÓGICA DO JOGADOR ========== */
-    resetPlayer() {
-        this.player = {
-            x: 100,
-            y: this.groundY - 50,
-            width: 40,
-            height: 50,
-            velX: 0,
-            velY: 0,
-            speed: 6,
-            jumpPower: 16,
-            onGround: false,
-            onPlatform: false,
-            currentPlatform: null,
-            facing: 'right',
-            isMoving: false,
-            isCrouching: false,
-            invulnerable: false,
-            invulnerableTime: 0,
-            coyoteTime: 0,
-            jumpBuffer: 0,
-            dying: false
-        };
-    }
+ resetPlayer() {
+    this.player = {
+        x: 100, // Posição X inicial fixa
+        y: this.groundY - this.player.height, // Ajuste para ficar em cima do chão
+        width: 40,
+        height: 50,
+        velX: 0,
+        velY: 0,
+        speed: 6,
+        jumpPower: 16,
+        onGround: false,
+        onPlatform: false,
+        currentPlatform: null,
+        facing: 'right',
+        isMoving: false,
+        isCrouching: false,
+        invulnerable: false,
+        invulnerableTime: 0,
+        coyoteTime: 0,
+        jumpBuffer: 0,
+        dying: false
+    };
+    this.cameraX = 0; // Resetar a câmera também
+}
 
     resetPlayerPosition() {
         this.player.x = Math.max(100, this.cameraX + 50);
@@ -592,9 +613,14 @@ class RavenGame {
         });
     }
 
-    updateCamera() {
-    const targetCameraX = this.player.x - this.canvas.width / 3;
-    this.cameraX += (targetCameraX - this.cameraX) * 0.1;
+  updateCamera() {
+    // Se o jogador estiver no início, forçar a câmera para o início também
+    if (this.player.x <= 100) {
+        this.cameraX = 0;
+    } else {
+        const targetCameraX = this.player.x - this.canvas.width / 3;
+        this.cameraX += (targetCameraX - this.cameraX) * 0.1;
+    }
     this.cameraX = Math.max(0, Math.min(this.cameraX, this.worldLimit - this.canvas.width));
 }
 
@@ -611,21 +637,20 @@ class RavenGame {
 
     checkCollisions() {
         // Colisão com tintas
-        this.inkBottles.forEach(ink => {
-            if (!ink.collected && this.collision(this.player, {
-                x: ink.x - 5,
-                y: ink.y - 5,
-                width: ink.width + 10,
-                height: ink.height + 10
-            })) {
-                ink.collected = true;
-                this.score += 100;
-                this.createParticle(ink.x + ink.width/2, ink.y + ink.height/2, ink.color, 'collect');
-                this.itemsToCollect--;
-                
-                if (this.sounds.collect) this.sounds.collect();
-            }
-        });
+    this.inkBottles.forEach(ink => {
+        if (!ink.collected && this.collision(this.player, {
+            x: ink.x - 5,
+            y: ink.y - 5,
+            width: ink.width + 10,
+            height: ink.height + 10
+        })) {
+            ink.collected = true;
+            this.score += 10; // Alterado de 100 para 10
+            this.createParticle(ink.x + ink.width/2, ink.y + ink.height/2, ink.color, 'collect');
+            this.itemsToCollect--;
+            
+            if (this.sounds.collect) this.sounds.collect();
+        }  });
         
         // Colisão com plataformas
         this.player.onPlatform = false;
@@ -1403,29 +1428,28 @@ class RavenGame {
     }
 
     /* ========== GERENCIAMENTO DE NÍVEL ========== */
-    levelComplete() {
-        this.gameState = 'levelComplete';
-        this.hideAllMenus();
-        
-        const couponCode = `RAVEN${Date.now().toString().slice(-6)}`;
-        const couponElement = document.getElementById('couponCode');
-        if (couponElement) couponElement.textContent = couponCode;
-        
-        const levelCompleteMenu = document.getElementById('levelCompleteMenu');
-        if (levelCompleteMenu) levelCompleteMenu.classList.add('active');
-        
-        if (this.sounds.levelComplete) this.sounds.levelComplete();
-        this.stopBackgroundMusic();
-    }
+   levelComplete() {
+    this.gameState = 'levelComplete';
+    this.hideAllMenus();
+    
+    // Removemos a geração do cupom e atualizamos a mensagem
+    const pointsElement = document.getElementById('pointsEarned');
+    if (pointsElement) pointsElement.textContent = this.score;
+    
+    const levelCompleteMenu = document.getElementById('levelCompleteMenu');
+    if (levelCompleteMenu) levelCompleteMenu.classList.add('active');
+    
+    if (this.sounds.levelComplete) this.sounds.levelComplete();
+    this.stopBackgroundMusic();
+}
 
-  nextLevel() {
+nextLevel() {
     this.stopBackgroundMusic();
     clearTimeout(this.musicTimer);
     
     this.level++;
-    this.score += this.lives * 50;
+    this.score += this.lives * 20; // Alterado de 50 para 20 (ou o valor que preferir)
     
-    // Resetar completamente o estado do jogo
     this.resetGameState();
     this.resetPlayer();
     
@@ -1534,7 +1558,8 @@ class RavenGame {
     }
 }
 
-// Inicialização segura
-document.addEventListener('DOMContentLoaded', () => {
-    new RavenGame();
+// Substitua a última parte do código (inicialização) por:
+window.addEventListener('load', () => {
+    const game = new RavenGame();
+    console.log("Jogo inicializado com sucesso!");
 });
