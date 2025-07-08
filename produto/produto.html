@@ -1317,7 +1317,6 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--neon-green);
         }
-
         /* Notification Styles */
         .notification {
             position: fixed;
@@ -1334,11 +1333,9 @@
             transition: transform 0.3s ease-in-out;
             z-index: 9999;
         }
-        
         .notification.show {
             transform: translateX(0);
         }
-
         /* Modal de Avaliação */
         .modal {
             display: none;
@@ -1352,7 +1349,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .modal-content {
             background: var(--gradient-dark);
             padding: 2rem;
@@ -1361,9 +1357,13 @@
             box-shadow: var(--neon-glow-green);
             max-width: 600px;
             width: 90%;
-            position: relative;
+            max-height: 90vh; /* Adicionado para limitar a altura */
+            overflow-y: auto; /* Adicionado para permitir rolagem */
+            position: fixed; /* Alterado para fixed para centralização */
+            top: 50%; /* Adicionado para centralização vertical */
+            left: 50%; /* Adicionado para centralização horizontal */
+            transform: translate(-50%, -50%); /* Adicionado para centralização perfeita */
         }
-
         .close-modal {
             position: absolute;
             top: 15px;
@@ -1373,11 +1373,9 @@
             cursor: pointer;
             transition: var(--transition-smooth);
         }
-
         .close-modal:hover {
             color: var(--neon-blue);
         }
-
         .modal-title {
             font-family: var(--font-secondary);
             color: var(--neon-green);
@@ -1385,42 +1383,34 @@
             font-size: 2rem;
             text-align: center;
         }
-
         .rating-stars {
             display: flex;
             justify-content: center;
             gap: 0.5rem;
             margin-bottom: 1.5rem;
         }
-
         .rating-stars .star {
             font-size: 2rem;
             color: var(--medium-gray);
             cursor: pointer;
             transition: var(--transition-smooth);
         }
-
         .rating-stars .star.selected {
             color: gold;
         }
-
         .rating-stars .star:hover {
             transform: scale(1.2);
         }
-
         .form-group {
             margin-bottom: 1.5rem;
         }
-
         .form-group label {
             display: block;
             font-family: var(--font-tech);
             color: var(--text-light);
             margin-bottom: 0.5rem;
         }
-
-        .form-group input,
-        .form-group textarea {
+        .form-group input, .form-group textarea {
             width: 100%;
             padding: 0.8rem;
             background: var(--dark-gray);
@@ -1429,12 +1419,10 @@
             color: var(--text-light);
             font-family: var(--font-tech);
         }
-
         .form-group textarea {
             min-height: 150px;
             resize: vertical;
         }
-
         .submit-review {
             background: var(--neon-green);
             color: var(--primary-black);
@@ -1449,67 +1437,54 @@
             display: block;
             width: 100%;
         }
-
         .submit-review:hover {
             background: var(--neon-blue);
             box-shadow: var(--neon-glow-blue);
             transform: translateY(-3px);
         }
-
         .login-message {
             text-align: center;
             margin-top: 1rem;
             font-family: var(--font-tech);
         }
-
         .login-message a {
             color: var(--neon-blue);
             text-decoration: none;
             transition: var(--transition-smooth);
         }
-
         .login-message a:hover {
             color: var(--neon-green);
         }
-
         /* Responsive */
         @media (max-width: 1024px) {
             .product-hero-content {
                 grid-template-columns: 1fr;
                 gap: 3rem;
             }
-            
             .details-content {
                 grid-template-columns: 1fr;
             }
-            
             .artist-profile {
                 grid-template-columns: 1fr;
             }
-            
             .artist-image {
                 max-width: 400px;
                 margin: 0 auto;
             }
         }
-
         @media (max-width: 768px) {
             .product-title {
                 font-size: 2.8rem;
             }
-            
             .product-actions {
                 flex-direction: column;
             }
-            
             .specs-grid {
                 grid-template-columns: 1fr;
             }
-            
             .care-instructions {
                 grid-template-columns: 1fr;
             }
-
             .nav-links {
                 display: none;
                 position: absolute;
@@ -1521,46 +1496,36 @@
                 padding: 2rem;
                 border-bottom: 2px solid var(--neon-blue);
             }
-
             .nav-links.active {
                 display: flex;
             }
-
             .menu-toggle {
                 display: block;
             }
-
             .product-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1.5rem;
             }
-
             .product-title-container {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1rem;
             }
-
             .product-content {
                 flex-direction: column;
             }
-
-            .product-images,
-            .product-info {
+            .product-images, .product-info {
                 width: 100%;
             }
         }
-
         @media (max-width: 480px) {
             .product-title {
                 font-size: 2.2rem;
             }
-            
             .thumbnail-gallery {
                 flex-wrap: wrap;
             }
-            
             .artist-stats {
                 flex-direction: column;
             }
@@ -1598,7 +1563,6 @@
                             <span class="product-badge">Novidade</span>
                         </div>
                     </div>
-
                     <div class="product-content">
                         <div class="product-images">
                             <div class="main-image">
@@ -1609,81 +1573,74 @@
                                     <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Máquina de Tatuagem Rotativa Raven PRO X1">
                                 </div>
                                 <div class="thumbnail">
-                                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Máquina de Tatuagem Rotativa Raven PRO X1 - Detalhe 1">
+                                    <img src="https://images.unsplash.com/photo-1594708764724-44b413143c7b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Detalhe da Máquina de Tatuagem">
                                 </div>
                                 <div class="thumbnail">
-                                    <img src="https://images.unsplash.com/photo-1605649486796-49b6e9e4da5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Máquina de Tatuagem Rotativa Raven PRO X1 - Detalhe 2">
-                                </div>
-                                <div class="thumbnail">
-                                    <img src="https://images.unsplash.com/photo-1605649486796-49b6e9e4da5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Máquina de Tatuagem Rotativa Raven PRO X1 - Detalhe 3">
+                                    <img src="https://images.unsplash.com/photo-1594708764724-44b413143c7b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Máquina de Tatuagem em uso">
                                 </div>
                             </div>
                         </div>
                         <div class="product-info">
-                            <p class="product-sku">SKU: RPTX1-2025</p>
                             <div class="product-meta">
-                                <span class="product-artist">Por: CyberTattoo Tech</span>
+                                <span class="product-artist">Por: Raven Studios</span>
                                 <div class="product-rating">
-                                    <span class="stars">
+                                    <div class="stars">
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star-half-alt"></i>
-                                    </span>
-                                    <span>(4.5 estrelas, 120 avaliações)</span>
+                                    </div>
+                                    <span>4.5 (120 Avaliações)</span>
                                 </div>
                             </div>
                             <div class="product-price">
-                                <span class="old-price">R$ 1.800,00</span>
-                                <span class="price-amount">R$ 1.499,90</span>
-                                <span class="price-installment">Em até 12x de R$ 124,99 sem juros</span>
+                                <span class="price-label">Preço:</span>
+                                <span class="old-price">R$ 1.500,00</span>
+                                <span class="price-amount">R$ 1.250,00</span>
+                                <span class="price-installment">Em até 10x de R$ 125,00 sem juros</span>
+                                <span class="product-sku">SKU: RPTX1-001</span>
                             </div>
-
                             <div class="product-variants">
                                 <div class="variant-option">
                                     <h3>Cor:</h3>
                                     <div class="variant-selector">
-                                        <button class="variant-btn active" data-color="preto">Preto Cósmico</button>
-                                        <button class="variant-btn" data-color="azul">Azul Nebulosa</button>
-                                        <button class="variant-btn" data-color="vermelho">Vermelho Plasma</button>
+                                        <button class="variant-btn active">Preto Espacial</button>
+                                        <button class="variant-btn">Cromado Lunar</button>
+                                        <button class="variant-btn">Dourado Nebula</button>
                                     </div>
                                 </div>
                                 <div class="variant-option">
-                                    <h3>Tamanho do Grip:</h3>
+                                    <h3>Tensão (V):</h3>
                                     <div class="variant-selector">
-                                        <button class="variant-btn active" data-size="25mm">25mm</button>
-                                        <button class="variant-btn" data-size="30mm">30mm</button>
+                                        <button class="variant-btn">8V</button>
+                                        <button class="variant-btn active">10V</button>
+                                        <button class="variant-btn">12V</button>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="product-stock">
-                                <i class="fas fa-check-circle"></i> Em estoque: Envio imediato
+                                <i class="fas fa-check-circle"></i> Em Estoque
                             </div>
-
                             <div class="quantity-selector">
-                                <button class="quantity-btn">-</button>
-                                <input type="text" value="1" min="1" max="10">
-                                <button class="quantity-btn">+</button>
+                                <button class="quantity-btn" id="decrease-quantity">-</button>
+                                <input type="text" value="1" id="product-quantity" readonly>
+                                <button class="quantity-btn" id="increase-quantity">+</button>
                             </div>
-
                             <div class="product-actions">
-                                <button id="add-to-cart-btn" class="primary-button"><i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho</button>
-                                <a href="#" class="secondary-button"><i class="fas fa-heart"></i> Adicionar à Lista de Desejos</a>
+                                <button class="primary-button"><i class="fas fa-shopping-bag"></i> Adicionar ao Carrinho</button>
+                                <button class="secondary-button"><i class="fas fa-heart"></i> Adicionar à Lista de Desejos</button>
                             </div>
-
                             <div class="product-payment-methods">
-                                <h3>Métodos de Pagamento Seguros:</h3>
+                                <h3>Formas de Pagamento Seguras:</h3>
                                 <div class="payment-icons">
                                     <i class="fab fa-cc-visa"></i>
                                     <i class="fab fa-cc-mastercard"></i>
                                     <i class="fab fa-cc-paypal"></i>
-                                    <i class="fab fa-pix"></i>
                                     <i class="fas fa-barcode"></i>
+                                    <i class="fas fa-qrcode"></i>
                                 </div>
                             </div>
-
                             <div class="product-share">
                                 <h3>Compartilhe este Produto:</h3>
                                 <div class="share-buttons">
@@ -1699,55 +1656,54 @@
             </div>
         </section>
 
-        <section class="product-details section-padding bg-dark reveal-section">
+        <section class="product-details reveal-section">
             <div class="container">
                 <div class="tabs-container">
                     <div class="tabs-header">
                         <button class="tab-btn active" data-tab="description">Descrição</button>
                         <button class="tab-btn" data-tab="specs">Especificações</button>
                         <button class="tab-btn" data-tab="reviews">Avaliações (120)</button>
-                        <button class="tab-btn" data-tab="shipping">Entrega</button>
+                        <button class="tab-btn" data-tab="shipping">Entrega & Frete</button>
                     </div>
 
                     <div id="description" class="tab-panel active">
-                        <h2>Experiência de Tatuagem Elevada</h2>
-                        <p>A Máquina de Tatuagem Rotativa Raven PRO X1 é a ferramenta definitiva para artistas que buscam precisão, potência e conforto inigualáveis. Projetada com a mais avançada tecnologia, a PRO X1 garante linhas perfeitas, sombreamento suave e coloração sólida com mínimo esforço.</p>
-                        
-                        <h3>Características Principais:</h3>
+                        <h2>Máquina de Tatuagem Rotativa Raven PRO X1: Precisão e Potência para Artistas Exigentes</h2>
+                        <p>A Raven PRO X1 é a máquina de tatuagem rotativa definitiva para artistas que buscam performance, precisão e conforto. Desenvolvida com a mais alta tecnologia e materiais de ponta, ela oferece uma experiência de trabalho inigualável, permitindo que você crie obras de arte com detalhes impressionantes e linhas impecáveis.</p>
+                        <h3>Recursos Revolucionários:</h3>
                         <div class="features-grid">
                             <div class="feature-item">
-                                <i class="fas fa-lightbulb"></i>
-                                <h3>Motor Potente</h3>
-                                <p>Motor suíço de alta performance para tatuagens consistentes e sem falhas.</p>
+                                <i class="fas fa-cogs"></i>
+                                <h3>Motor Suíço de Alta Performance</h3>
+                                <p>Silencioso e potente, garante estabilidade e vibração mínima para trabalhos longos.</p>
                             </div>
                             <div class="feature-item">
-                                <i class="fas fa-ruler-combined"></i>
-                                <h3>Precisão Extrema</h3>
-                                <p>Ajuste de profundidade da agulha micro-preciso para controle total.</p>
+                                <i class="fas fa-fill-drip"></i>
+                                <h3>Sistema de Acionamento Direto</h3>
+                                <p>Transferência de energia otimizada para agulhas, resultando em pigmentação superior e menos trauma à pele.</p>
                             </div>
                             <div class="feature-item">
-                                <i class="fas fa-weight-hanging"></i>
-                                <h3>Design Ergonômico</h3>
-                                <p>Leve e balanceada, reduz a fadiga mesmo em sessões longas.</p>
+                                <i class="fas fa-brush"></i>
+                                <h3>Design Ergonômico e Leve</h3>
+                                <p>Conforto excepcional para sessões prolongadas, reduzindo a fadiga do pulso.</p>
                             </div>
                             <div class="feature-item">
-                                <i class="fas fa-tint"></i>
-                                <h3>Versatilidade</h3>
-                                <p>Compatível com a maioria dos cartuchos de agulha do mercado.</p>
+                                <i class="fas fa-adjust"></i>
+                                <h3>Ajuste de Stroke Versátil</h3>
+                                <p>Compatível com diferentes estilos de tatuagem, de linhas finas a preenchimentos sólidos.</p>
                             </div>
                         </div>
-
                         <h3>O Kit Inclui:</h3>
                         <ul class="kit-includes">
-                            <li><i class="fas fa-check-circle"></i> 1x Máquina de Tatuagem Raven PRO X1</li>
-                            <li><i class="fas fa-check-circle"></i> 1x Cabo RCA Premium</li>
-                            <li><i class="fas fa-check-circle"></i> 1x Grip Ajustável (25mm)</li>
-                            <li><i class="fas fa-check-circle"></i> Manual do Usuário e Certificado de Garantia</li>
+                            <li><i class="fas fa-check-circle"></i> Máquina Rotativa Raven PRO X1</li>
+                            <li><i class="fas fa-check-circle"></i> Cabo RCA Premium</li>
+                            <li><i class="fas fa-check-circle"></i> Kit de Ferramentas de Manutenção</li>
+                            <li><i class="fas fa-check-circle"></i> Manual do Usuário Detalhado</li>
+                            <li><i class="fas fa-check-circle"></i> Certificado de Autenticidade Raven Studio</li>
                         </ul>
                     </div>
 
                     <div id="specs" class="tab-panel">
-                        <h2>Especificações Técnicas Detalhadas</h2>
+                        <h2>Especificações Técnicas</h2>
                         <table class="specs-table">
                             <thead>
                                 <tr>
@@ -1757,70 +1713,68 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Tipo de Motor</td>
-                                    <td>Motor Suíço Personalizado</td>
+                                    <td>Tipo de Máquina</td>
+                                    <td>Rotativa</td>
+                                </tr>
+                                <tr>
+                                    <td>Material do Chassi</td>
+                                    <td>Alumínio Aeroespacial Anodizado</td>
+                                </tr>
+                                <tr>
+                                    <td>Motor</td>
+                                    <td>Motor Suíço Personalizado 12V</td>
+                                </tr>
+                                <tr>
+                                    <td>Tensão de Operação Recomendada</td>
+                                    <td>6-10V (máx. 12V)</td>
+                                </tr>
+                                <tr>
+                                    <td>Comprimento do Stroke (Curso)</td>
+                                    <td>Ajustável: 3.5mm - 4.0mm</td>
                                 </tr>
                                 <tr>
                                     <td>Conexão</td>
                                     <td>RCA</td>
                                 </tr>
                                 <tr>
-                                    <td>Curso</td>
-                                    <td>3.5mm (ajustável)</td>
-                                </tr>
-                                <tr>
-                                    <td>Tensão de Trabalho</td>
-                                    <td>5-12V DC (Recomendado 7-10V)</td>
-                                </tr>
-                                <tr>
-                                    <td>Velocidade</td>
-                                    <td>Até 10.000 RPM</td>
-                                </tr>
-                                <tr>
-                                    <td>Material</td>
-                                    <td>Alumínio Aeroespacial Anodizado</td>
-                                </tr>
-                                <tr>
                                     <td>Peso</td>
-                                    <td>120g (apenas a máquina)</td>
+                                    <td>130g</td>
                                 </tr>
                                 <tr>
                                     <td>Dimensões</td>
                                     <td>105mm x 30mm</td>
                                 </tr>
+                                <tr>
+                                    <td>Compatibilidade de Agulhas</td>
+                                    <td>Cartuchos padrão (todas as marcas)</td>
+                                </tr>
                             </tbody>
                         </table>
 
-                        <h3>Compatibilidade:</h3>
+                        <h3>Compatibilidade e Certificações:</h3>
                         <ul class="compatibility-list">
-                            <li><i class="fas fa-check-circle"></i> Compatível com todos os principais cartuchos de agulha (ex: Cheyenne, Kwadron, EZ)</li>
-                            <li><i class="fas fa-check-circle"></i> Funciona com a maioria das fontes de alimentação padrão</li>
+                            <li><i class="fas fa-check-circle"></i> Compatível com a maioria das fontes de alimentação do mercado.</li>
+                            <li><i class="fas fa-check-circle"></i> Projetada para uso com cartuchos de agulha descartáveis.</li>
                         </ul>
-
-                        <h3>Certificações:</h3>
                         <div class="certifications">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/CE_Logo.svg/1200px-CE_Logo.svg.png" alt="Certificação CE" style="height: 50px;">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/RoHS.svg/1200px-RoHS.svg.png" alt="Certificação RoHS" style="height: 50px;">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FCC_Logo.svg/1200px-FCC_Logo.svg.png" alt="Aprovação FCC" style="height: 50px;">
+                            <img src="https://via.placeholder.com/80x40?text=CE" alt="Certificação CE">
+                            <img src="https://via.placeholder.com/80x40?text=ROHS" alt="Certificação ROHS">
+                            <img src="https://via.placeholder.com/80x40?text=ISO" alt="Certificação ISO">
                         </div>
                     </div>
 
                     <div id="reviews" class="tab-panel">
-                        <h2>Avaliações dos Clientes</h2>
+                        <h2>Avaliações de Clientes</h2>
                         <div class="reviews-summary">
                             <div class="rating-overview">
                                 <div class="average-rating">
                                     <span class="rating-value">4.5</span>
-                                    <span class="stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                    </span>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
                                     <span class="rating-count">Baseado em 120 Avaliações</span>
                                 </div>
-                                <button id="write-review-btn" class="write-review-btn">Escrever uma Avaliação</button>
+                                <button class="write-review-btn" id="open-review-modal"><i class="fas fa-pen"></i> Escrever uma Avaliação</button>
                             </div>
                             <div class="rating-bars">
                                 <div class="rating-bar">
@@ -1855,44 +1809,44 @@
                             <div class="review-item">
                                 <div class="review-header">
                                     <div class="review-author">
-                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Avatar do Usuário">
-                                        <h4>João Tattoo</h4>
-                                        <span class="stars">
+                                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Avatar Cliente">
+                                        <h4>Ana TattooArtist</h4>
+                                        <div class="stars">
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
-                                        </span>
+                                        </div>
                                     </div>
-                                    <span class="review-date">10 de Junho, 2025</span>
+                                    <span class="review-date">2 de Julho, 2025</span>
                                 </div>
-                                <h3 class="review-title">A Melhor Máquina que Já Usei!</h3>
-                                <p class="review-text">Absolutamente impressionado com a Raven PRO X1. A precisão é inacreditável e a máquina é super leve, o que faz uma diferença enorme em longas sessões. As linhas saem perfeitas e o sombreamento é suave como seda. Recomendo fortemente a todos os tatuadores profissionais!</p>
+                                <h3 class="review-title">"Incrível! Superou minhas expectativas!"</h3>
+                                <p class="review-text">Essa máquina é um sonho! Leve, potente e extremamente precisa. Meus traços ficaram muito mais limpos e a pigmentação, perfeita. Recomendo a todos os profissionais.</p>
                                 <div class="review-actions">
-                                    <button><i class="fas fa-thumbs-up"></i> Útil (25)</button>
+                                    <button><i class="fas fa-thumbs-up"></i> Útil (15)</button>
                                     <button><i class="fas fa-share-alt"></i> Compartilhar</button>
                                 </div>
                             </div>
                             <div class="review-item">
                                 <div class="review-header">
                                     <div class="review-author">
-                                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar do Usuário">
-                                        <h4>Maria Ink</h4>
-                                        <span class="stars">
+                                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Avatar Cliente">
+                                        <h4>Bruno InkMaster</h4>
+                                        <div class="stars">
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star-half-alt"></i>
-                                        </span>
+                                        </div>
                                     </div>
-                                    <span class="review-date">05 de Junho, 2025</span>
+                                    <span class="review-date">28 de Junho, 2025</span>
                                 </div>
-                                <h3 class="review-title">Potência e Conforto em Uma Só Máquina</h3>
-                                <p class="review-text">A PRO X1 superou minhas expectativas. É muito silenciosa e a vibração é mínima. Consigo trabalhar por horas sem sentir cansaço nas mãos. A qualidade da tatuagem final melhorou muito desde que comecei a usar esta máquina. Só queria que tivesse mais opções de cores!</p>
+                                <h3 class="review-title">"Ótimo custo-benefício e excelente para preenchimentos"</h3>
+                                <p class="review-text">Adorei a PRO X1 para preenchimentos. O motor aguenta o trabalho e a pele sofre menos. Pelo preço, é uma das melhores rotativas que já usei.</p>
                                 <div class="review-actions">
-                                    <button><i class="fas fa-thumbs-up"></i> Útil (18)</button>
+                                    <button><i class="fas fa-thumbs-up"></i> Útil (8)</button>
                                     <button><i class="fas fa-share-alt"></i> Compartilhar</button>
                                 </div>
                             </div>
@@ -1900,500 +1854,399 @@
                     </div>
 
                     <div id="shipping" class="tab-panel">
-                        <h2>Informações de Entrega e Frete</h2>
+                        <h2>Entrega e Frete</h2>
                         <div class="shipping-info">
-                            <p>Na Raven Studio, nos esforçamos para garantir que seu pedido chegue de forma rápida e segura. Oferecemos diversas opções de entrega para atender às suas necessidades.</p>
-                            <h3>Opções de Envio Disponíveis:</h3>
+                            <p>Na Raven Studio, nos dedicamos a entregar seus produtos com a máxima segurança e rapidez. Abaixo, você encontra as informações sobre nossas opções de frete e prazos de entrega.</p>
+                            <h3>Opções de Envio:</h3>
                             <div class="shipping-options">
                                 <div class="shipping-option-card">
-                                    <h3><i class="fas fa-truck"></i> Entrega Expressa</h3>
+                                    <h3><i class="fas fa-shipping-fast"></i> Frete Expresso</h3>
                                     <ul>
-                                        <li><i class="fas fa-clock"></i> Prazo: 1-3 dias úteis</li>
-                                        <li><i class="fas fa-dollar-sign"></i> Custo: Varia por localização</li>
-                                        <li><i class="fas fa-box"></i> Rastreamento completo</li>
+                                        <li><i class="fas fa-check-circle"></i> Prazo de Entrega: 3-7 dias úteis</li>
+                                        <li><i class="fas fa-check-circle"></i> Rastreamento Completo</li>
+                                        <li><i class="fas fa-check-circle"></i> Prioridade no Manuseio</li>
                                     </ul>
                                 </div>
                                 <div class="shipping-option-card">
-                                    <h3><i class="fas fa-shipping-fast"></i> Entrega Padrão</h3>
+                                    <h3><i class="fas fa-truck-loading"></i> Frete Padrão</h3>
                                     <ul>
-                                        <li><i class="fas fa-clock"></i> Prazo: 5-10 dias úteis</li>
-                                        <li><i class="fas fa-dollar-sign"></i> Custo: Frete Grátis para pedidos acima de R$500</li>
-                                        <li><i class="fas fa-box"></i> Rastreamento limitado</li>
-                                    </ul>
-                                </div>
-                                <div class="shipping-option-card">
-                                    <h3><i class="fas fa-store"></i> Retirada na Loja</h3>
-                                    <ul>
-                                        <li><i class="fas fa-clock"></i> Prazo: Disponível em 24h</li>
-                                        <li><i class="fas fa-dollar-sign"></i> Custo: Gratuito</li>
-                                        <li><i class="fas fa-map-marker-alt"></i> Local: [Endereço da Loja]</li>
+                                        <li><i class="fas fa-check-circle"></i> Prazo de Entrega: 7-15 dias úteis</li>
+                                        <li><i class="fas fa-check-circle"></i> Rastreamento Disponível</li>
+                                        <li><i class="fas fa-check-circle"></i> Custo Reduzido</li>
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="shipping-calculator">
-                            <h3>Calcule seu Frete</h3>
-                            <div class="form-group">
-                                <label for="cep-input">CEP:</label>
-                                <input type="text" id="cep-input" placeholder="Ex: 00000-000" maxlength="9">
+                            <h3>Cálculo de Frete:</h3>
+                            <div class="shipping-calculator">
+                                <h3>Calcule o Frete para seu CEP</h3>
+                                <div class="form-group">
+                                    <label for="cep-input">CEP:</label>
+                                    <input type="text" id="cep-input" placeholder="Ex: 00000-000" maxlength="9">
+                                </div>
+                                <button id="calculate-shipping-btn" class="primary-button">Calcular Frete</button>
+                                <div id="shipping-result" class="shipping-results" style="display: none;">
+                                    <p><strong>Prazo estimado:</strong> <span id="estimated-days"></span> dias úteis</p>
+                                    <p><strong>Valor do frete:</strong> R$ <span id="shipping-cost"></span></p>
+                                </div>
                             </div>
-                            <button id="calculate-shipping-btn" class="primary-button">Calcular Frete</button>
-                            <div id="shipping-results" class="shipping-results">
-                            </div>
+                            <p><strong>Atenção:</strong> Os prazos de entrega podem variar de acordo com a sua região e eventuais atrasos por parte das transportadoras.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="related-products section-padding bg-dark reveal-section">
+        <section class="related-products reveal-section">
             <div class="container">
                 <h2>Produtos Relacionados</h2>
                 <div class="products-grid">
-                    <a href="produto.html" class="product-card">
+                    <a href="#" class="product-card">
                         <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Fonte de Alimentação Digital Raven Power">
+                            <img src="https://images.unsplash.com/photo-1587060938676-e175730303e4?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Fonte de Alimentação para Tatuagem">
                         </div>
-                        <h3>Fonte de Alimentação Digital Raven Power</h3>
-                        <span class="price-amount">R$ 599,90</span>
-                        <span class="cta-button primary-button">Ver Detalhes</span>
+                        <h3>Fonte Digital ThunderVolt</h3>
+                        <span class="price-amount">R$ 550,00</span>
+                        <button class="primary-button cta-button">Ver Detalhes</button>
                     </a>
-                    <a href="produto.html" class="product-card">
+                    <a href="#" class="product-card">
                         <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Kit de Agulhas de Cartucho Premium Raven">
+                            <img src="https://images.unsplash.com/photo-1594708764724-44b413143c7b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Kit de Agulhas para Tatuagem">
                         </div>
-                        <h3>Kit de Agulhas de Cartucho Premium Raven</h3>
-                        <span class="price-amount">R$ 189,90</span>
-                        <span class="cta-button primary-button">Ver Detalhes</span>
+                        <h3>Kit Agulhas Descartáveis PRO</h3>
+                        <span class="price-amount">R$ 180,00</span>
+                        <button class="primary-button cta-button">Ver Detalhes</button>
                     </a>
-                    <a href="produto.html" class="product-card">
+                    <a href="#" class="product-card">
                         <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Bancada Auxiliar de Tatuagem Ajustável">
+                            <img src="https://images.unsplash.com/photo-1588691526435-081831804f86?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Tintas para Tatuagem">
                         </div>
-                        <h3>Bancada Auxiliar de Tatuagem Ajustável</h3>
-                        <span class="price-amount">R$ 799,00</span>
-                        <span class="cta-button primary-button">Ver Detalhes</span>
+                        <h3>Set de Tintas Spectrum (12 Cores)</h3>
+                        <span class="price-amount">R$ 420,00</span>
+                        <button class="primary-button cta-button">Ver Detalhes</button>
                     </a>
-                    <a href="produto.html" class="product-card">
+                    <a href="#" class="product-card">
                         <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Tinta de Tatuagem Raven Black">
+                            <img src="https://images.unsplash.com/photo-1594708764724-44b413143c7b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Pomada Pós-Tatuagem">
                         </div>
-                        <h3>Tinta de Tatuagem Raven Black 240ml</h3>
-                        <span class="price-amount">R$ 249,90</span>
-                        <span class="cta-button primary-button">Ver Detalhes</span>
+                        <h3>Pomada Cicatrizante DermaCare</h3>
+                        <span class="price-amount">R$ 65,00</span>
+                        <button class="primary-button cta-button">Ver Detalhes</button>
                     </a>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Modal de Avaliação -->
-    <div id="review-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2 class="modal-title">Escreva sua Avaliação</h2>
-            
-            <div id="review-form">
-                <div class="form-group">
-                    <label for="review-title">Título da Avaliação:</label>
-                    <input type="text" id="review-title" placeholder="Ex: Excelente produto!">
-                </div>
-                
-                <div class="form-group">
-                    <label>Sua Avaliação:</label>
-                    <div class="rating-stars">
-                        <span class="star" data-rating="1"><i class="far fa-star"></i></span>
-                        <span class="star" data-rating="2"><i class="far fa-star"></i></span>
-                        <span class="star" data-rating="3"><i class="far fa-star"></i></span>
-                        <span class="star" data-rating="4"><i class="far fa-star"></i></span>
-                        <span class="star" data-rating="5"><i class="far fa-star"></i></span>
-                    </div>
-                    <input type="hidden" id="review-rating" value="0">
-                </div>
-                
-                <div class="form-group">
-                    <label for="review-text">Comentário:</label>
-                    <textarea id="review-text" placeholder="Conte sua experiência com o produto..."></textarea>
-                </div>
-                
-                <button id="submit-review" class="submit-review">Enviar Avaliação</button>
-            </div>
-            
-            <div id="login-message" class="login-message" style="display: none;">
-                <p>Você precisa estar logado para escrever uma avaliação.</p>
-                <a href="login.html">Fazer Login</a>
-            </div>
-        </div>
-    </div>
-
     <footer class="footer">
-        <div class="container footer-content">
-            <div class="footer-left">
+        <div class="footer-content">
+            <div class="footer-col">
                 <a href="index.html" class="footer-brand">Raven Studio</a>
-                <p>Sua fonte para produtos de tatuagem de alta qualidade.</p>
+                <p>Qualidade e Inovação para sua arte.</p>
             </div>
-            <div class="footer-center">
+            <div class="footer-col">
                 <ul class="footer-nav">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="products.html">Produtos</a></li>
-                    <li><a href="about.html">Sobre Nós</a></li>
+                    <li><a href="about.html">Sobre</a></li>
                     <li><a href="contact.html">Contato</a></li>
-                    <li><a href="privacy.html">Política de Privacidade</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
                 </ul>
             </div>
-            <div class="footer-right">
+            <div class="footer-col">
                 <div class="footer-social">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
-                <p>&copy; 2025 Raven Studio. Todos os direitos reservados.</p>
-            </div>
-            <div class="footer-info">
-                <p>Endereço: Rua da Tatuagem, 123 - Centro, Cidade - Estado, CEP: 00000-000</p>
-                <p>Email: contato@ravenstudio.com | Telefone: (11) 98765-4321</p>
-            </div>
+                <p>Assine nossa Newsletter para novidades!</p>
+                </div>
+        </div>
+        <div class="footer-info">
+            <p>&copy; 2025 Raven Studio. Todos os direitos reservados.</p>
+            <p>Desenvolvido com paixão pela arte da tatuagem.</p>
         </div>
     </footer>
 
-    <div id="notification" class="notification">Produto adicionado ao carrinho!</div>
+    <div id="review-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Escrever uma Avaliação</h2>
+            <form id="review-form">
+                <div class="form-group">
+                    <label for="reviewer-name">Seu Nome:</label>
+                    <input type="text" id="reviewer-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="review-title">Título da Avaliação:</label>
+                    <input type="text" id="review-title" required>
+                </div>
+                <div class="form-group">
+                    <label>Sua Classificação:</label>
+                    <div class="rating-stars" id="modal-rating-stars">
+                        <i class="far fa-star star" data-value="1"></i>
+                        <i class="far fa-star star" data-value="2"></i>
+                        <i class="far fa-star star" data-value="3"></i>
+                        <i class="far fa-star star" data-value="4"></i>
+                        <i class="far fa-star star" data-value="5"></i>
+                    </div>
+                    <input type="hidden" id="selected-rating" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="review-text">Sua Avaliação:</label>
+                    <textarea id="review-text" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-review">Enviar Avaliação</button>
+            </form>
+            <p class="login-message">Ainda não tem uma conta? <a href="#">Faça login ou cadastre-se para avaliar!</a></p>
+        </div>
+    </div>
+
+    <div id="notification" class="notification">
+        Produto adicionado ao carrinho!
+    </div>
 
     <script>
-        // Estado do usuário (simulado)
-        const userState = {
-            isLoggedIn: true, // Alterado para true para testar
-            name: "Usuário Teste",
-            avatar: "https://randomuser.me/api/portraits/men/1.jpg"
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Sticky header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Thumbnail gallery functionality
+        const mainImage = document.querySelector('.main-image img');
+        const thumbnails = document.querySelectorAll('.thumbnail img');
+
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', () => {
+                // Remove active class from all thumbnails
+                thumbnails.forEach(t => t.parentElement.classList.remove('active'));
+                // Add active class to clicked thumbnail's parent
+                thumbnail.parentElement.classList.add('active');
+                // Change main image source
+                mainImage.src = thumbnail.src;
+            });
+        });
+
+        // Quantity selector
+        const decreaseBtn = document.getElementById('decrease-quantity');
+        const increaseBtn = document.getElementById('increase-quantity');
+        const quantityInput = document.getElementById('product-quantity');
+
+        decreaseBtn.addEventListener('click', () => {
+            let currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        });
+
+        increaseBtn.addEventListener('click', () => {
+            let currentValue = parseInt(quantityInput.value);
+            quantityInput.value = currentValue + 1;
+        });
+
+        // Product Tabs functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and panels
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabPanels.forEach(panel => panel.classList.remove('active'));
+
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                // Show the corresponding tab panel
+                const targetTab = button.dataset.tab;
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+
+        // Scroll Reveal Animation
+        const revealSections = document.querySelectorAll('.reveal-section');
+
+        const observerOptions = {
+            threshold: 0.15 // Trigger when 15% of the item is visible
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // Atualizar ícone do usuário se estiver logado
-            updateUserIcon();
-
-            // Smooth Scroll for Navigation (if applicable)
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-
-            // Mobile Menu Toggle
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navLinks = document.querySelector('.nav-links');
-
-            if (menuToggle) {
-                menuToggle.addEventListener('click', () => {
-                    navLinks.classList.toggle('active');
-                });
-            }
-
-            // Tab functionality for product details
-            const tabButtons = document.querySelectorAll('.tab-btn');
-            const tabPanels = document.querySelectorAll('.tab-panel');
-
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Deactivate all tabs and panels
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    tabPanels.forEach(panel => panel.classList.remove('active'));
-
-                    // Activate clicked tab and corresponding panel
-                    button.classList.add('active');
-                    document.getElementById(button.dataset.tab).classList.add('active');
-                });
-            });
-
-            // Image Thumbnail Gallery
-            const mainProductImage = document.querySelector('.main-image img');
-            const thumbnails = document.querySelectorAll('.thumbnail');
-
-            thumbnails.forEach(thumbnail => {
-                thumbnail.addEventListener('click', () => {
-                    // Remove active class from all thumbnails
-                    thumbnails.forEach(thumb => thumb.classList.remove('active'));
-                    // Add active class to clicked thumbnail
-                    thumbnail.classList.add('active');
-                    // Change main image source
-                    mainProductImage.src = thumbnail.querySelector('img').src;
-                    mainProductImage.alt = thumbnail.querySelector('img').alt;
-                });
-            });
-
-            // Quantity Selector
-            const quantityInput = document.querySelector('.quantity-selector input');
-            const minusBtn = document.querySelector('.quantity-btn:first-of-type');
-            const plusBtn = document.querySelector('.quantity-btn:last-of-type');
-
-            if (quantityInput && minusBtn && plusBtn) {
-                minusBtn.addEventListener('click', () => {
-                    let currentValue = parseInt(quantityInput.value);
-                    if (currentValue > parseInt(quantityInput.min)) {
-                        quantityInput.value = currentValue - 1;
-                    }
-                });
-
-                plusBtn.addEventListener('click', () => {
-                    let currentValue = parseInt(quantityInput.value);
-                    if (currentValue < parseInt(quantityInput.max)) {
-                        quantityInput.value = currentValue + 1;
-                    }
-                });
-            }
-
-            // Variant Selection
-            const variantButtons = document.querySelectorAll('.variant-btn');
-            
-            variantButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Remove active class from all buttons in the same variant group
-                    const parentSelector = button.closest('.variant-selector');
-                    parentSelector.querySelectorAll('.variant-btn').forEach(btn => {
-                        btn.classList.remove('active');
-                    });
-                    
-                    // Add active class to clicked button
-                    button.classList.add('active');
-                });
-            });
-
-            // Add to Cart Functionality
-            const addToCartBtn = document.getElementById('add-to-cart-btn');
-            const notification = document.getElementById('notification');
-
-            if (addToCartBtn && notification) {
-                addToCartBtn.addEventListener('click', () => {
-                    // Show notification
-                    notification.classList.add('show');
-                    
-                    // Hide notification after 3 seconds
-                    setTimeout(() => {
-                        notification.classList.remove('show');
-                    }, 3000);
-                });
-            }
-
-            // Shipping Calculator
-            const calculateShippingBtn = document.getElementById('calculate-shipping-btn');
-            const shippingResults = document.getElementById('shipping-results');
-
-            if (calculateShippingBtn && shippingResults) {
-                calculateShippingBtn.addEventListener('click', () => {
-                    const cepInput = document.getElementById('cep-input');
-                    if (cepInput && cepInput.value.length === 9) {
-                        // Simulate shipping calculation
-                        shippingResults.innerHTML = `
-                            <p><strong>Opções de envio para CEP ${cepInput.value}:</strong></p>
-                            <p>Expresso (1-3 dias úteis): R$ 25,90</p>
-                            <p>Padrão (5-10 dias úteis): R$ 15,90</p>
-                            <p>Frete Grátis (acima de R$500): 7-12 dias úteis</p>
-                        `;
-                    } else {
-                        shippingResults.innerHTML = `<p>Por favor, insira um CEP válido no formato 00000-000</p>`;
-                    }
-                });
-            }
-
-            // Review System - Código corrigido
-            const writeReviewBtn = document.getElementById('write-review-btn');
-            const reviewModal = document.getElementById('review-modal');
-            const closeModal = document.querySelector('.close-modal');
-            const stars = document.querySelectorAll('.rating-stars .star'); // Seleciona apenas as estrelas do modal
-            const reviewRating = document.getElementById('review-rating');
-            const reviewForm = document.getElementById('review-form');
-            const loginMessage = document.getElementById('login-message');
-            const submitReviewBtn = document.getElementById('submit-review');
-
-            // Função para atualizar as estrelas
-            function updateStars(rating) {
-                stars.forEach(star => {
-                    const starRating = parseInt(star.getAttribute('data-rating'));
-                    if (starRating <= rating) {
-                        star.innerHTML = '<i class="fas fa-star"></i>';
-                        star.classList.add('selected');
-                    } else {
-                        star.innerHTML = '<i class="far fa-star"></i>';
-                        star.classList.remove('selected');
-                    }
-                });
-            }
-
-            // Abrir modal de avaliação
-            if (writeReviewBtn) {
-                writeReviewBtn.addEventListener('click', () => {
-                    if (userState.isLoggedIn) {
-                        reviewForm.style.display = 'block';
-                        loginMessage.style.display = 'none';
-                        reviewModal.style.display = 'flex';
-                        // Resetar estrelas ao abrir o modal
-                        updateStars(0);
-                        reviewRating.value = '0';
-                    } else {
-                        reviewForm.style.display = 'none';
-                        loginMessage.style.display = 'block';
-                        reviewModal.style.display = 'flex';
-                    }
-                });
-            }
-
-            // Fechar modal
-            if (closeModal) {
-                closeModal.addEventListener('click', () => {
-                    reviewModal.style.display = 'none';
-                });
-            }
-
-            // Fechar modal ao clicar fora
-            window.addEventListener('click', (e) => {
-                if (e.target === reviewModal) {
-                    reviewModal.style.display = 'none';
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Stop observing once revealed
                 }
             });
+        }, observerOptions);
 
-            // Sistema de classificação por estrelas - Código corrigido
-            stars.forEach(star => {
-                star.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Impede a propagação do evento
-                    const rating = parseInt(star.getAttribute('data-rating'));
-                    reviewRating.value = rating;
-                    updateStars(rating);
-                });
+        revealSections.forEach(section => {
+            sectionObserver.observe(section);
+        });
 
-                // Efeito hover nas estrelas
-                star.addEventListener('mouseover', () => {
-                    const rating = parseInt(star.getAttribute('data-rating'));
-                    stars.forEach(s => {
-                        const sRating = parseInt(s.getAttribute('data-rating'));
-                        if (sRating <= rating) {
-                            s.innerHTML = '<i class="fas fa-star"></i>';
-                        } else {
-                            s.innerHTML = '<i class="far fa-star"></i>';
-                        }
-                    });
-                });
+        // Notification for "Add to Cart"
+        const primaryButton = document.querySelector('.primary-button');
+        const notification = document.getElementById('notification');
 
-                // Resetar visualização quando o mouse sai
-                star.addEventListener('mouseout', () => {
-                    const currentRating = parseInt(reviewRating.value);
-                    updateStars(currentRating);
-                });
+        if (primaryButton) {
+            primaryButton.addEventListener('click', (e) => {
+                // Prevent default button behavior if it's a form submission, etc.
+                e.preventDefault(); 
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000); // Hide after 3 seconds
             });
-
-            // Enviar avaliação
-            if (submitReviewBtn) {
-                submitReviewBtn.addEventListener('click', () => {
-                    const title = document.getElementById('review-title').value;
-                    const rating = reviewRating.value;
-                    const text = document.getElementById('review-text').value;
-                    
-                    if (rating === '0') {
-                        alert('Por favor, selecione uma classificação com estrelas');
-                        return;
-                    }
-                    
-                    if (title.trim() === '') {
-                        alert('Por favor, insira um título para sua avaliação');
-                        return;
-                    }
-                    
-                    if (text.trim() === '') {
-                        alert('Por favor, escreva seu comentário');
-                        return;
-                    }
-                    
-                    // Aqui você normalmente enviaria os dados para o servidor
-                    // Vamos simular o envio e adicionar a nova avaliação
-                    addNewReview(title, rating, text);
-                    
-                    // Fechar o modal
-                    reviewModal.style.display = 'none';
-                    
-                    // Mostrar notificação
-                    notification.textContent = 'Avaliação enviada com sucesso!';
-                    notification.classList.add('show');
-                    
-                    setTimeout(() => {
-                        notification.classList.remove('show');
-                    }, 3000);
-                    
-                    // Limpar o formulário
-                    document.getElementById('review-title').value = '';
-                    document.getElementById('review-text').value = '';
-                    reviewRating.value = '0';
-                    updateStars(0);
-                });
-            }
-
-            // Reveal Sections on Scroll
-            const revealSections = () => {
-                const sections = document.querySelectorAll('.reveal-section');
-                
-                sections.forEach(section => {
-                    const sectionTop = section.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-                    
-                    if (sectionTop < windowHeight - 100) {
-                        section.classList.add('is-visible');
-                    }
-                });
-            };
-
-            // Initial check and event listener for scroll
-            revealSections();
-            window.addEventListener('scroll', revealSections);
-        });
-
-        // CEP Input Mask
-        document.getElementById('cep-input')?.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            
-            if (value.length > 5) {
-                value = value.substring(0, 5) + '-' + value.substring(5, 8);
-            }
-            
-            e.target.value = value;
-        });
-
-        // Função para atualizar ícone do usuário
-        function updateUserIcon() {
-            const userIconLink = document.getElementById('user-avatar-link');
-            if (userIconLink) {
-                if (userState.isLoggedIn) {
-                    userIconLink.innerHTML = `<img src="${userState.avatar}" alt="${userState.name}" style="width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--neon-green);">`;
-                } else {
-                    userIconLink.innerHTML = '<i class="fas fa-user-circle"></i>';
-                }
-            }
         }
 
-        // Função para adicionar nova avaliação (simulação)
-        function addNewReview(title, rating, text) {
-            const reviewsList = document.querySelector('.reviews-list');
-            const now = new Date();
-            const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-            const dateStr = `${now.getDate()} de ${months[now.getMonth()]}, ${now.getFullYear()}`;
-            
-            const starsHtml = Array.from({length: 5}, (_, i) => 
-                i < rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>'
-            ).join('');
-            
+        // Shipping Calculator (Basic Example)
+        const calculateShippingBtn = document.getElementById('calculate-shipping-btn');
+        const cepInput = document.getElementById('cep-input');
+        const shippingResult = document.getElementById('shipping-result');
+        const estimatedDaysSpan = document.getElementById('estimated-days');
+        const shippingCostSpan = document.getElementById('shipping-cost');
+
+        if (calculateShippingBtn) {
+            calculateShippingBtn.addEventListener('click', () => {
+                const cep = cepInput.value.replace(/\D/g, ''); // Remove non-digits
+                if (cep.length === 8) {
+                    // Simulate API call or a more complex calculation
+                    let days, cost;
+                    if (cep.startsWith('0') || cep.startsWith('1')) { // Example for SP
+                        days = '3-5';
+                        cost = '25.00';
+                    } else if (cep.startsWith('2') || cep.startsWith('3')) { // Example for RJ/MG
+                        days = '5-10';
+                        cost = '35.00';
+                    } else { // Other regions
+                        days = '7-15';
+                        cost = '45.00';
+                    }
+
+                    estimatedDaysSpan.textContent = days;
+                    shippingCostSpan.textContent = cost;
+                    shippingResult.style.display = 'block';
+                } else {
+                    alert('Por favor, insira um CEP válido com 8 dígitos.');
+                    shippingResult.style.display = 'none';
+                }
+            });
+        }
+        
+        // Review Modal Functionality
+        const openReviewModalBtn = document.getElementById('open-review-modal');
+        const reviewModal = document.getElementById('review-modal');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const modalRatingStars = document.getElementById('modal-rating-stars');
+        const selectedRatingInput = document.getElementById('selected-rating');
+        const reviewForm = document.getElementById('review-form');
+        const reviewsList = document.querySelector('.reviews-list'); // Assuming this exists
+
+        openReviewModalBtn.addEventListener('click', () => {
+            reviewModal.style.display = 'flex';
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            reviewModal.style.display = 'none';
+            reviewForm.reset(); // Reset form on close
+            selectedRatingInput.value = 0; // Reset rating
+            document.querySelectorAll('.rating-stars .star').forEach(star => {
+                star.classList.remove('selected', 'fas');
+                star.classList.add('far');
+            });
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == reviewModal) {
+                reviewModal.style.display = 'none';
+                reviewForm.reset(); // Reset form on close
+                selectedRatingInput.value = 0; // Reset rating
+                document.querySelectorAll('.rating-stars .star').forEach(star => {
+                    star.classList.remove('selected', 'fas');
+                    star.classList.add('far');
+                });
+            }
+        });
+
+        modalRatingStars.addEventListener('click', (event) => {
+            if (event.target.classList.contains('star')) {
+                const value = parseInt(event.target.dataset.value);
+                selectedRatingInput.value = value;
+
+                document.querySelectorAll('.rating-stars .star').forEach(star => {
+                    if (parseInt(star.dataset.value) <= value) {
+                        star.classList.add('selected', 'fas');
+                        star.classList.remove('far');
+                    } else {
+                        star.classList.remove('selected', 'fas');
+                        star.classList.add('far');
+                    }
+                });
+            }
+        });
+
+        reviewForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            const reviewerName = document.getElementById('reviewer-name').value;
+            const reviewTitle = document.getElementById('review-title').value;
+            const reviewText = document.getElementById('review-text').value;
+            const rating = parseInt(selectedRatingInput.value);
+
+            if (rating === 0) {
+                alert('Por favor, selecione uma classificação em estrelas.');
+                return;
+            }
+
+            // Create new review HTML element
             const newReview = document.createElement('div');
-            newReview.className = 'review-item';
+            newReview.classList.add('review-item');
+
+            const date = new Date();
+            const dateStr = date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+
+            let starsHtml = '';
+            for (let i = 0; i < 5; i++) {
+                if (i < rating) {
+                    starsHtml += '<i class="fas fa-star"></i>';
+                } else {
+                    starsHtml += '<i class="far fa-star"></i>';
+                }
+            }
+
             newReview.innerHTML = `
                 <div class="review-header">
                     <div class="review-author">
-                        <img src="${userState.avatar}" alt="Avatar do Usuário">
-                        <h4>${userState.name}</h4>
+                        <img src="https://via.placeholder.com/50?text=User" alt="Avatar Cliente">
+                        <h4>${reviewerName}</h4>
                         <span class="stars">${starsHtml}</span>
                     </div>
                     <span class="review-date">${dateStr}</span>
                 </div>
-                <h3 class="review-title">${title}</h3>
-                <p class="review-text">${text}</p>
+                <h3 class="review-title">${reviewTitle}</h3>
+                <p class="review-text">${reviewText}</p>
                 <div class="review-actions">
                     <button><i class="fas fa-thumbs-up"></i> Útil (0)</button>
                     <button><i class="fas fa-share-alt"></i> Compartilhar</button>
@@ -2417,7 +2270,15 @@
                 const newCount = parseInt(currentText.match(/\d+/)[0]) + 1;
                 reviewsTabBtn.textContent = currentText.replace(/\d+/, newCount);
             }
-        }
+
+            reviewModal.style.display = 'none'; // Close modal
+            reviewForm.reset(); // Reset form
+            selectedRatingInput.value = 0; // Reset rating
+            document.querySelectorAll('.rating-stars .star').forEach(star => {
+                star.classList.remove('selected', 'fas');
+                star.classList.add('far');
+            });
+        });
     </script>
 </body>
 </html>
